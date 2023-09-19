@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
+const db = require("../model/helper");
 
-/* GET home page. */
+/* GET Database listening */
 router.get('/', function(req, res, next) {
-  res.send({ title: Express });
+  res.send({ 'welcome to the API' });
 });
 
 module.exports = router;
