@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-function Register() {
+function Signup() {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -22,10 +22,10 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Send a POST request to your backend to register the user using Axios
+    // Send a POST request to backend to register the user using Axios
     try {
-        const response = await axios.post('api/register', formData);
-  
+        const response = await axios.post('/api/users/register', formData);
+        console.log(response.data);
         if (response.status === 200) {
           console.log('Registration successful');
         } else {
@@ -113,4 +113,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Signup;
