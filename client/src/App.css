@@ -1,0 +1,58 @@
+/* GENERAL */ 
+
+
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  max-width: 1280px;
+  text-align: center;
+  --color-primary: #75a4c1;   /* Color principal */
+  --color-secondary: #527291; /* Color secundario */
+  --color-tertiary: #b5bdc9;  /* Color terciario */
+  background-color: var(--color-primary);
+  -webkit-text-size-adjust: 100%;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-primary);
+
+}
+
+p {
+  text-align: justify;
+}
+
+.container {
+  width: 80%; /* Porcentaje en lugar de píxeles */
+  margin: 0 auto; /* Centrar horizontalmente */
+  background-color: var(--color-tertiary);;
+}
+
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  text-align: right;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background-color: var(--color-tertiary); /* Fondos de botones con el color terciario */
+}
+
+
+.nav-link {
+  color: var(--color-secondary); /* Enlaces de navegación con el color secundario */
+}
