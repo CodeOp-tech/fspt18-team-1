@@ -16,8 +16,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api', apiRouter);
+app.use('/api/trips', tripsRouter);
+app.use('/api/places', placesRouter);
+app.use('/api/users', usersRouter);
+
 
 app.use(cors()); // add after 'app' is created
 
