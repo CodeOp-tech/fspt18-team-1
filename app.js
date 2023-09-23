@@ -4,7 +4,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var apiRouter = require('./routes/api');
-var tripsRouter = require('./routes/api/trips');
+var usersRouter = require('./routes/users');
+var tripsRouter = require('./routes/trips');
+var placesRouter = require('./routes/places');
 
 var app = express();
 
@@ -17,10 +19,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', apiRouter);
+app.use('/api/users', usersRouter);
 app.use('/api/trips', tripsRouter);
 app.use('/api/places', placesRouter);
-app.use('/api/users', usersRouter);
-
 
 app.use(cors()); // add after 'app' is created
 
