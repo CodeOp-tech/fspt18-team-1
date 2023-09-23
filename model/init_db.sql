@@ -9,16 +9,6 @@ CREATE DATABASE IF NOT EXISTS tripmanager;
 USE tripmanager;
 
 --
--- Delete database if exists
---
-
-DROP DATABASE IF EXISTS tripmanager;
-
-CREATE DATABASE IF NOT EXISTS tripmanager;
-
-USE tripmanager;
-
---
 -- Drop Tables
 --
 
