@@ -32,7 +32,7 @@ CREATE TABLE `users`(
     `birthdate` DATE,
     `foto` VARCHAR(255)
 );
-CREATE TABLE `expences`(
+CREATE TABLE `expenses`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `trip_id` INT UNSIGNED NOT NULL,
     `name` VARCHAR(255) NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE `places`(
 );
 
 ALTER TABLE
-    `expences` ADD CONSTRAINT `expences_trip_id_foreign` FOREIGN KEY(`trip_id`) REFERENCES `trips`(`id`) ON DELETE CASCADE;
+    `expenses` ADD CONSTRAINT `expenses_trip_id_foreign` FOREIGN KEY(`trip_id`) REFERENCES `trips`(`id`) ON DELETE CASCADE;
 ALTER TABLE
     `images` ADD CONSTRAINT `images_trip_id_foreign` FOREIGN KEY(`trip_id`) REFERENCES `trips`(`id`) ON DELETE CASCADE;
 ALTER TABLE
@@ -79,3 +79,6 @@ ALTER TABLE
 --
 
 INSERT INTO users (username, password, email, nationality, birthdate, foto) VALUES ('Vanessa', 'password', 'vanessa.cavaco.branco@gmail.com', 'Portuguese', '1990-07-01', 'idfoto');
+INSERT INTO trips (user_id,name,coordinates,date,description) VALUES ('1','MyTripAçores','41.40412445575105, 2.1745114924114657','2023-07-01', 'Description trip to açores');
+INSERT INTO places (trip_id,coordinates,day, date, description) VALUES ('1','41.38733083681041, 2.168190808510549',"2023-08-09",'Place description');
+INSERT INTO images ( name,trip_id,place_id,description) VALUES ('foto01','1','1','fotodescription');
