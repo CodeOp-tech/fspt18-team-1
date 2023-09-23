@@ -24,13 +24,13 @@ SET foreign_key_checks = 1;
 -- Create Tables
 --
 CREATE TABLE `users`(
-    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `username` VARCHAR(255) NOT NULL,
-    `password` VARCHAR(255) NOT NULL,
-    `email` VARCHAR(255) NOT NULL,
-    `nationality` VARCHAR(255) NOT NULL,
-    `birthdate` DATE NOT NULL,
-    `foto` VARCHAR(255) NOT NULL
+    `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `username` VARCHAR (255) UNIQUE, 
+    `password` VARCHAR(255),
+    `email` VARCHAR (255) UNIQUE, 
+    `nationality` VARCHAR(255),
+    `birthdate` DATE,
+    `foto` VARCHAR(255)
 );
 CREATE TABLE `expenses`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -78,7 +78,7 @@ ALTER TABLE
 -- Insert data into tables
 --
 
-INSERT INTO users (user, password, email, nationality, birthdate, foto) VALUES ('Vanessa', 'password', 'vanessa.cavaco.branco@gmail.com', 'Portuguese', '1990-07-01', 'idfoto');
+INSERT INTO users (username, password, email, nationality, birthdate, foto) VALUES ('Vanessa', 'password', 'vanessa.cavaco.branco@gmail.com', 'Portuguese', '1990-07-01', 'idfoto');
 INSERT INTO trips (user_id,name,coordinates,date,description) VALUES ('1','MyTripAçores','41.40412445575105, 2.1745114924114657','2023-07-01', 'Description trip to açores');
 INSERT INTO places (trip_id,coordinates,day, date, description) VALUES ('1','41.38733083681041, 2.168190808510549',"2023-08-09",'Place description');
 INSERT INTO images ( name,trip_id,place_id,description) VALUES ('foto01','1','1','fotodescription');
