@@ -25,5 +25,4 @@ app.use('/api/places', placesRouter);
 
 app.use(cors()); // add after 'app' is created
 
-
 module.exports = app;
