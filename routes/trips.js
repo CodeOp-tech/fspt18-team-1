@@ -8,7 +8,6 @@ router.get('/', function(req, res, next) {
 });
 
 /********* TRIPS **********/
-
 /* GET ALL - todos los proyectos de la BBDD*/
 router.get("/trips",(req,res)=>{
     // llama a la lista completa de trips atraves de la funcion db
