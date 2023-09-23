@@ -9,16 +9,6 @@ CREATE DATABASE IF NOT EXISTS tripmanager;
 USE tripmanager;
 
 --
--- Delete database if exists
---
-
-DROP DATABASE IF EXISTS tripmanager;
-
-CREATE DATABASE IF NOT EXISTS tripmanager;
-
-USE tripmanager;
-
---
 -- Drop Tables
 --
 
@@ -34,13 +24,13 @@ SET foreign_key_checks = 1;
 -- Create Tables
 --
 CREATE TABLE `users`(
-    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `user` VARCHAR(255) NOT NULL,
-    `password` VARCHAR(255) NOT NULL,
-    `email` VARCHAR(255) NOT NULL,
-    `nationality` VARCHAR(255) NOT NULL,
-    `birthdate` DATE NOT NULL,
-    `foto` VARCHAR(255) NOT NULL
+    `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `username` VARCHAR (255) UNIQUE, 
+    `password` VARCHAR(255),
+    `email` VARCHAR (255) UNIQUE, 
+    `nationality` VARCHAR(255),
+    `birthdate` DATE,
+    `foto` VARCHAR(255)
 );
 CREATE TABLE `expences`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -87,18 +77,5 @@ ALTER TABLE
 --
 -- Insert data into tables
 --
-
-INSERT INTO users (user, password, email, nationality, birthdate, foto) VALUES ('Vanessa', 'password', 'vanessa.cavaco.branco@gmail.com', 'Portuguese', '1990-07-01', 'idfoto');
-
-
-CREATE TABLE `users`(
-    `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    `username` VARCHAR (255) UNIQUE, 
-    `password` VARCHAR(255),
-    `email` VARCHAR (255) UNIQUE, 
-    `nationality` VARCHAR(255),
-    `birthdate` DATE,
-    `foto` VARCHAR(255)
-);
 
 INSERT INTO users (username, password, email, nationality, birthdate, foto) VALUES ('Vanessa', 'password', 'vanessa.cavaco.branco@gmail.com', 'Portuguese', '1990-07-01', 'idfoto');
