@@ -57,6 +57,7 @@ CREATE TABLE `images`(
 CREATE TABLE `places`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `trip_id` INT UNSIGNED NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
     `coordinates` VARCHAR(255) NOT NULL,
     `day` VARCHAR(255) NOT NULL,
     `date` DATE NOT NULL,
@@ -80,5 +81,5 @@ ALTER TABLE
 
 INSERT INTO users (username, password, email, nationality, birthdate, foto) VALUES ('Vanessa', 'password', 'vanessa.cavaco.branco@gmail.com', 'Portuguese', '1990-07-01', 'idfoto');
 INSERT INTO trips (user_id,name,coordinates,date,description) VALUES ('1','MyTripAçores','41.40412445575105, 2.1745114924114657','2023-07-01', 'Description trip to açores');
-INSERT INTO places (trip_id,coordinates,day,date,description) VALUES ('1','41.38733083681041, 2.168190808510549','day 1','2023-08-09','Place description');
+INSERT INTO places (trip_id,name,coordinates,day,date,description) VALUES ('1','sagrada familia','41.38733083681041, 2.168190808510549','day 1','2023-08-09','Place description');
 INSERT INTO images ( name,trip_id,place_id,description) VALUES ('foto01','1','1','fotodescription');
