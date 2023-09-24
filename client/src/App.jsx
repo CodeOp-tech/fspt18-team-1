@@ -1,8 +1,9 @@
 import './App.css'
-import NavBar from './componentes/NavBar';
+import NavBar from './components/NavBar';
 import Signup from './components/Signup';
 import Login from "./pages/Login"
 import MyTrip from "./pages/MyTrip"
+import MyTripAdd from "./pages/MyTripAdd"
 import Trips from "./pages/Trips"
 import {
   BrowserRouter as Router,
@@ -19,8 +20,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/trips" element={<Trips />} />
           <Route path="/mytrip" element={<MyTrip />} />
+          <Route path="/mytripadd" element={<MyTripAdd />} />
         </Routes>
-
     </Router>
   )
 }

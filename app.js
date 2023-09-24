@@ -1,4 +1,5 @@
 var express = require('express');
+const cors = require('cors') // add at the top
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -9,8 +10,8 @@ var tripsRouter = require('./routes/trips');
 var placesRouter = require('./routes/places');
 
 var app = express();
+app.use(cors()); // add after 'app' is created
 
-const cors = require('cors') // add at the top
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -23,6 +24,5 @@ app.use('/api/users', usersRouter);
 app.use('/api/trips', tripsRouter);
 app.use('/api/places', placesRouter);
 
-app.use(cors()); // add after 'app' is created
 
 module.exports = app;
