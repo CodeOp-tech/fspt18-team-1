@@ -15,6 +15,9 @@ function NavBar () {
       <li>
         <Link to="/mytrip">Mytrip</Link>
       </li>
+      <li>
+        <Link to="/mytripAdd">Add</Link>
+      </li>
     </ul>
   </nav>
 )}; 

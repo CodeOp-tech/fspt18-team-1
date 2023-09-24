@@ -50,7 +50,6 @@ router.put("/:trip_id", async (req, res) => {
     };
 });
 
-
 /* DELETE - elimina una trip */
 router.delete("/:trip_id", async (req, res) => {
     try {
