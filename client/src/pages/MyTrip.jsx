@@ -7,7 +7,7 @@ function MyTrip() {
     //actualiza la constante myTrips
     useEffect(() => {
         getMyTrips();
-    },[]);
+    }, []);
 
     //llama a la base de datos y trae todos los viajes
     const getMyTrips = () => {
@@ -19,13 +19,29 @@ function MyTrip() {
             .catch((error) => {
                 console.log("Oops! Something went wrong")
             });
-    }
+    };
+    const handleDelete = async (trip_id) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/trips/${trip_id}`,
+                { method: 'DELETE' });
+            if (response.ok) {
+                getMyTrips();
+                return;
+            }
+            console.log("Something went wrong");
+        } catch (error) {
+            console.log("Something went wrong");
+        };
+    };
 
     return (
         <div>
             <div>MyTrip</div>
             {myTrips.map((trip) => (
-                <li key={trip.id}>{trip.name}</li>
+                <div key={trip.id}>
+                    <li>{trip.name}</li>
+                    <button className="" onClick={() => handleDelete(trip.id)}>Delete</button>
+                </div>
             ))}
         </div>
     )
