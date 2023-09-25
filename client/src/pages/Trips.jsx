@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./Trips.css";
+import { Link } from 'react-router-dom'
 
 function Trips() {
 
@@ -8,7 +9,7 @@ function Trips() {
     //actualiza la constante myTrips
     useEffect(() => {
         getTrips();
-    },[]);
+    }, []);
 
     //llama a la base de datos y trae todos los viajes
     const getTrips = () => {
@@ -26,8 +27,11 @@ function Trips() {
         <div>
             <div>Trips</div>
             {Trips.map((trip) => (
-                <li key={trip.id}>{trip.name}</li>
+                <Link key={trip.id} to={`/trips/${trip.id}`}>
+                    <li >{trip.name}</li>
+                </Link>
             ))}
+
         </div>
     )
 }
