@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./MyTrip.css";
 import { useNavigate } from 'react-router-dom';
-import Trips from './Trips';
 
-function MyTripAdd() {
+//tripData prop is to receive data to edit the trip
+function MyTripAdd({ tripData, onCancel }) {
     const navigate = useNavigate();
     const [myTrip, setMyTrip] = useState({
         user_id: "1",
@@ -12,6 +12,13 @@ function MyTripAdd() {
         date: "",
         description: "",
     })
+
+    // Use useEffect to populate the form with existing trip data if it's provided
+    useEffect(() => {
+        if (tripData) {
+            setMyTrip(tripData);
+        }
+    }, [tripData]);
 
     const handleChange = (event) => {
         //cada elemento del event target
@@ -24,23 +31,39 @@ function MyTripAdd() {
         setMyTrip((myTrip) => ({ ...myTrip, [name]: value }));
     };
 
-    const handleSubmit = async(event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        try{
-            const response = await fetch('http://localhost:5000/api/trips/',{
-                method: "POST",
-                headers:{
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(myTrip),
-            });
-            if(response.ok){
-                navigate('/trips');
-            };
-        }catch (error) {
+        try {
+            //check if trip data exists- to edit and not create a new trip
+            if (tripData) {
+                // Editing an existing trip
+                const response = await fetch(`http://localhost:5000/api/trips/${tripData.id}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(myTrip),
+                });
+                if (response.ok) {
+                    navigate('/trips');
+                }
+            } else {
+                //Adding a new trip
+                const response = await fetch('http://localhost:5000/api/trips/', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(myTrip),
+                });
+                if (response.ok) {
+                    navigate('/trips');
+                };
+            }
+        } catch (error) {
             console.error("Error adding trip:", error);
         };
-//limpia a setMytRIP
+        //limpia a setMytRIP
         setMyTrip({
             user_id: "1",
             name: "",
@@ -48,6 +71,31 @@ function MyTripAdd() {
             date: "",
             description: "",
         });
+    };
+    const onCancelAdd = () => {
+        // 1. Limpia el formulario
+        setMyTrip({
+            user_id: "1",
+            name: "",
+            coordinates: "",
+            date: "",
+            description: "",
+        });
+        // 2. Puedes mostrar un mensaje de confirmación o realizar otras acciones adicionales aquí
+        alert("No trip added")
+        // 3. Navega de vuelta a la lista de viajes u otro lugar en tu aplicación
+        navigate('/trips');
+    };
+
+    const handleCancel = () => {
+        if (tripData) {
+            // Si tripData está definido (estamos en modo de edición), cancelar la edición
+            onCancel(); // Llama a la función onCancel para realizar la acción de cancelar la edición
+        } else {
+            // Si tripData no está definido (estamos en modo de adición), cancelar la adición
+            // Puedes realizar cualquier lógica necesaria aquí, como cerrar el formulario y volver a la lista de viajes
+            onCancelAdd(); // Llama a una función específica para cancelar la adición
+        }
     };
 
     return (
@@ -67,7 +115,7 @@ function MyTripAdd() {
                         />
                     </div>
                     <div className="form__element" >
-                        {/* html for vincula en lables con el id del input */}
+                        {/* html for vincula en labels con el id del input */}
                         <label htmlFor="coordinates">Where:</label>
                         <input className="form__element__input"
                             id="coordinates"
@@ -101,7 +149,8 @@ function MyTripAdd() {
                         />
                     </div>
                     <div className="form__element">
-                        <button className="button button__add" type="submit"> + </button>
+                        <button className="button button__add" type="submit"> {tripData ? 'Save' : '+'} </button>
+                        <button className="button button__cancel" onClick={handleCancel}>Cancel</button>
                     </div>
                 </div>
             </form>
