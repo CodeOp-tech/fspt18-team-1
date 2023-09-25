@@ -73,7 +73,7 @@ ALTER TABLE
 ALTER TABLE
     `images` ADD CONSTRAINT `images_place_id_foreign` FOREIGN KEY(`place_id`) REFERENCES `places`(`id`) ON DELETE CASCADE;
 ALTER TABLE
-    `places` ADD CONSTRAINT `places_trip_id_foreign` FOREIGN KEY(`trip_id`) REFERENCES `trips`(`id`);
+    `places` ADD CONSTRAINT `places_trip_id_foreign` FOREIGN KEY(`trip_id`) REFERENCES `trips`(`id`) ON DELETE CASCADE;
 
 --
 -- Insert data into tables

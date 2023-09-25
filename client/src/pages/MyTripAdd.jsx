@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import "./MyTrip.css";
 import { useNavigate } from 'react-router-dom';
-import Trips from './Trips';
 
 function MyTripAdd() {
     const navigate = useNavigate();
