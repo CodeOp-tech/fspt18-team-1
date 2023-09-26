@@ -13,9 +13,6 @@ function NavBar () {
         <Link to="/trips">Trips</Link>
       </li>
       <li>
-        <Link to="/mytrip">Mytrip</Link>
-      </li>
-      <li>
         <Link to="/mytripAdd">Add</Link>
       </li>
     </ul>

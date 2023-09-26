@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import "./MyTrip.css";
-import { useNavigate } from 'react-router-dom';
 
 //tripData prop is to receive data to edit the trip
-function MyTripAdd({ tripData, onCancel }) {
+function MyTripAdd() {
+    const { trip_id } = useParams();
     const navigate = useNavigate();
     const [myTrip, setMyTrip] = useState({
         user_id: "1",
@@ -15,10 +16,26 @@ function MyTripAdd({ tripData, onCancel }) {
 
     // Use useEffect to populate the form with existing trip data if it's provided
     useEffect(() => {
-        if (tripData) {
-            setMyTrip(tripData);
+        if (trip_id) {
+            // Realiza una solicitud al servidor para obtener los datos del viaje por trip_id
+            fetch(`http://localhost:5000/api/trips/${trip_id}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    setMyTrip(data[0]);
+                })
+                .catch((error) => {
+                    console.log('Oops! Something went wrong');
+                });
+        }else{
+            setMyTrip({
+                user_id: "1",
+                name: "",
+                coordinates: "",
+                date: "",
+                description: "",
+            })
         }
-    }, [tripData]);
+    }, [trip_id]);
 
     const handleChange = (event) => {
         //cada elemento del event target
@@ -35,9 +52,9 @@ function MyTripAdd({ tripData, onCancel }) {
         event.preventDefault();
         try {
             //check if trip data exists- to edit and not create a new trip
-            if (tripData) {
+            if (trip_id) {
                 // Editing an existing trip
-                const response = await fetch(`http://localhost:5000/api/trips/${tripData.id}`, {
+                const response = await fetch(`http://localhost:5000/api/trips/${trip_id}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -72,6 +89,17 @@ function MyTripAdd({ tripData, onCancel }) {
             description: "",
         });
     };
+    
+    const handleCancel = () => {
+        if (trip_id) {
+            // Si trip_id está definido (estamos en modo de edición), cancelar la edición
+            navigate('/trips'); // Navega de vuelta a la lista de viajes sin guardar cambios
+        } else {
+            // Si trip_id no está definido (estamos en modo de adición), cancelar la adición
+            onCancelAdd(); // Llama a una función específica para cancelar la adición
+        }
+    };
+    
     const onCancelAdd = () => {
         // 1. Limpia el formulario
         setMyTrip({
@@ -86,18 +114,7 @@ function MyTripAdd({ tripData, onCancel }) {
         // 3. Navega de vuelta a la lista de viajes u otro lugar en tu aplicación
         navigate('/trips');
     };
-
-    const handleCancel = () => {
-        if (tripData) {
-            // Si tripData está definido (estamos en modo de edición), cancelar la edición
-            onCancel(); // Llama a la función onCancel para realizar la acción de cancelar la edición
-        } else {
-            // Si tripData no está definido (estamos en modo de adición), cancelar la adición
-            // Puedes realizar cualquier lógica necesaria aquí, como cerrar el formulario y volver a la lista de viajes
-            onCancelAdd(); // Llama a una función específica para cancelar la adición
-        }
-    };
-
+    
     return (
         <div>
             <div>MyTrip</div>
@@ -149,7 +166,7 @@ function MyTripAdd({ tripData, onCancel }) {
                         />
                     </div>
                     <div className="form__element">
-                        <button className="button button__add" type="submit"> {tripData ? 'Save' : '+'} </button>
+                        <button className="button button__add" type="submit"> {trip_id ? 'Save' : '+'} </button>
                         <button className="button button__cancel" onClick={handleCancel}>Cancel</button>
                     </div>
                 </div>

@@ -13,6 +13,19 @@ router.get("/", (req, res) => {
         .catch(error => res.status(500).send(error));
 });
 
+/* GET by Id - todos los trips de la BBDD*/
+router.get("/:trip_id", (req, res) => {
+     // Obtén el ID del viaje desde los parámetros de la URL
+     const tripId = req.params.trip_id;
+    // llama a la lista completa de trips atraves de la funcion db
+    db(`SELECT * FROM trips WHERE id =${tripId};`)
+        .then(results => {
+            res.send(results.data);
+        })
+        .catch(error => res.status(500).send(error));
+});
+
+
 /* POST - añade una nueva trip */
 router.post("/", async (req, res) => {
     try {
