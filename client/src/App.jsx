@@ -30,14 +30,16 @@ function App() {
     <Router>
       <NavBar/>
       <Routes>
-      {isLoggedIn ? (
+      {/* {isLoggedIn ? (
           <Route path="/trips" element={<Trips />} />
         ) : (
           <Route path="/registration-form" element={<RegistrationForm />} />
-        )}
+        )} */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/mytrip" element={<MyTrip />} />
+          <Route path="/trips" element={<Trips />} />
+          <Route path="/trips/:trip_id" element={<MyTrip />} />
           <Route path="/mytripadd" element={<MyTripAdd />} />
           <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
         </Routes>
