@@ -26,6 +26,14 @@ function MyTripAdd() {
                 .catch((error) => {
                     console.log('Oops! Something went wrong');
                 });
+        }else{
+            setMyTrip({
+                user_id: "1",
+                name: "",
+                coordinates: "",
+                date: "",
+                description: "",
+            })
         }
     }, [trip_id]);
 
