@@ -40,10 +40,10 @@ router.post("/register", async (req, res) => {
 /*POST login*/
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-
+ 
   try {
     const results = await db(
-      `SELECT * FROM users WHERE user = "${username}"`
+      `SELECT * FROM users WHERE username = "${username}"`
     );
     const user = results.data[0];
     if(user) {
@@ -66,7 +66,8 @@ router.post("/login", async (req, res) => {
 
 router.get("/profile", userShouldBeLoggedIn, (req, res) => {
   res.send({
-    message: "Here is the PROTECTED data for user " + req.traveler_id,
+    
+    message: "Here is the PROTECTED data for user " + req.user_id,
   });
 })
 
