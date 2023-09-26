@@ -29,6 +29,19 @@ function Login() {
           console.log(error);
         }
       };
+  const login = async () => {
+    try {
+      const { data } = await axios(`${HOSTNAME}/users/login`, {
+        method: "POST",
+        data: credentials,
+      });
+      localStorage.setItem("token", data.token);
+      console.log(data.message, data.token);
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
       return(
         <div>
