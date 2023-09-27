@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Login from './Login'; // Importa el componente de inicio de sesión
-import Signup from './Signup'; // Importa el componente de registro
+import Login from '../components/Login'; 
+import Signup from '../components/Signup';
 
 function RegistrationForm() {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,7 +10,7 @@ function RegistrationForm() {
       <h2>{isLogin ? 'Login' : 'Signup'}</h2>
       {isLogin ? <Login /> : <Signup />}
       <button onClick={() => setIsLogin(!isLogin)}>
-        {isLogin ? 'No tienes una cuenta? Regístrate' : '¿Ya tienes una cuenta? Inicia Sesión'}
+        {isLogin ? 'Don\'t have an account? Sign up' : '¿Have an account? Sign in'}
       </button>
     </div>
   );
