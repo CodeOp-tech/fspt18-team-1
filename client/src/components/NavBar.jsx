@@ -7,13 +7,13 @@ function NavBar () {
     <nav>
     <ul>
       <li>
-        <Link to="/logout">Logout</Link>
-      </li>
-      <li>
         <Link to="/trips">Trips</Link>
       </li>
       <li>
         <Link to="/mytripAdd">Add</Link>
+      </li>
+      <li>
+        <Link to="/logout">Logout</Link>
       </li>
     </ul>
   </nav>

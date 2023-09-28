@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const HOSTNAME = "http://localhost:5000";
+const HOSTNAME = "/api";
 
 function Login() {
     const [credentials, setCredentials] = useState({
@@ -50,7 +50,7 @@ function Login() {
                 <button className="" onClick={login}>
                     Log in
                 </button>
-                <Link to="/signup">Registrarse</Link>
+                <Link to="/signup"> Don't have an account?</Link>
                 </div>
         </div>
       )

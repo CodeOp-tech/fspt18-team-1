@@ -8,11 +8,7 @@ import RegistrationForm from './pages/RegistrationForm';
 import MyTrip from "./pages/MyTrip"
 import MyTripAdd from "./pages/MyTripAdd"
 import Trips from "./pages/Trips"
-import RegistrationForm from './pages/RegistrationForm';
-import Logout from './components/Logout';
 
-import RegistrationForm from './pages/RegistrationForm';
-import Logout from './components/Logout';
 
 import {
   BrowserRouter as Router,
@@ -39,17 +35,16 @@ function App() {
     <Router>
       <NavBar/>
       <Routes>
-      {/* {isLoggedIn ? (
-          <Route path="/trips" element={<Trips />} />
+      {isLoggedIn ? (
+        <Route path="/login" element={<Login />} />
         ) : (
           <Route path="/registration-form" element={<RegistrationForm />} />
-        )} */}
-          <Route path="/login" element={<Login />} />
+        )}
+          
           <Route path="/signup" element={<Signup />} />
           <Route path="/logout" element={<Logout />} /> 
           <Route path="/trips" element={<Trips />} />
           <Route path="/mytrip" element={<MyTrip />} />
-          <Route path="/trips" element={<Trips />} />
           <Route path="/trips/:trip_id" element={<MyTrip />} />
           <Route path="/mytripadd" element={<MyTripAdd />} />
           <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />

@@ -107,8 +107,7 @@ function Signup() {
           />
         </div>
         <div>
-        <button type="submit">Registrarse</button>
-          <Link to="/login">Iniciar Sesión</Link>
+          <Link to="/login">Register</Link>
         </div>
       </form>
     </div>
