@@ -9,7 +9,7 @@ function Signup() {
     email: '',
     nationality: '',
     birthdate: '',
-    foto: null,
+    //foto: null,
   });
 
   const handleInputChange = (e) => {
