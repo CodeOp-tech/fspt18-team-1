@@ -17,6 +17,9 @@ function NavBar () {
       <li>
         <Link to="/mytripAdd">Add</Link>
       </li>
+      <li>
+        <Link to="/logout">Logout</Link>
+      </li>
       </div>
     </ul>
     <ul>
@@ -28,6 +31,7 @@ function NavBar () {
       <li>Oceania</li>
       <li>Antártida</li>
       </div>
+     
     </ul>
   </nav>
 )}; 

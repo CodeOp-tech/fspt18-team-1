@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -8,7 +9,7 @@ function Signup() {
     email: '',
     nationality: '',
     birthdate: '',
-    foto: null,
+    //foto: null,
   });
 
   const handleInputChange = (e) => {
@@ -107,7 +108,7 @@ function Signup() {
           />
         </div>
         <div>
-          <button type="submit">Register</button>
+          <Link to="/login">Register</Link>
         </div>
       </form>
     </div>
