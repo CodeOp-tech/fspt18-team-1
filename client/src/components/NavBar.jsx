@@ -6,6 +6,8 @@ function NavBar () {
     return (
     <nav>
     <ul>
+    <div className="search-bar">
+    <form className="flex flex-col items-start"></form>
       <li>
         <Link to="/login">Login</Link>
       </li>
@@ -15,6 +17,17 @@ function NavBar () {
       <li>
         <Link to="/mytripAdd">Add</Link>
       </li>
+      </div>
+    </ul>
+    <ul>
+    <div className="continentes">
+      <li>Europa</li> 
+      <li>Asia</li>
+      <li>America</li>
+      <li>Africa</li>
+      <li>Oceania</li>
+      <li>Antártida</li>
+      </div>
     </ul>
   </nav>
 )}; 

@@ -31,6 +31,7 @@ function Signup() {
         } else {
           console.error('Registration failed');
         }
+        
       } catch (error) {
         console.error('Error:', error);
       }

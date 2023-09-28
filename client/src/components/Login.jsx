@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import "./Login.css";
 
 const HOSTNAME = "/api";
 
@@ -25,33 +26,38 @@ function Login() {
       localStorage.setItem("token", data.token);
       console.log(data.message, data.token);
     } catch (error) {
-      console.log(error);
+      setError("oups, something went wrong");
     }
   };
 
   return (
-    <div>
-      <div>
-        <input
+  <div className="login-container">
+    <div className='flex flex-col items-center'>
+      <h1 className="pt-14 pb-20">Login</h1>
+      <form className="flex flex-col items-start" onSubmit={(e) => handleSubmit(e)}></form>
+        <label className="w-36 inline-flex" htmlFor="name">User name</label>
+        <input className="w-80"
+        
           value={username}
           onChange={handleChange}
           name="username"
           type="text"
-          className=""
         />
-        <input
+        <p></p>
+        <label className="w-36 inline-flex" htmlFor="email">Password</label>
+        <input className="w-80"
           value={password}
           onChange={handleChange}
           name="password"
           type="password"
-          className=""
         />
-        <button className="" onClick={login}>
+        <p></p>
+        <button className="my-20 mx-52" type="submit" class="login-fieldset-submit">
           Log in
         </button>
       </div>
-    </div>
+</div>
   );
-}
+};
 
 export default Login;
