@@ -4,6 +4,7 @@ import NavBar from './components/NavBar';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Logout from './components/Logout';
+import Footer from './components/Footer/';
 import RegistrationForm from './pages/RegistrationForm';
 import MyTrip from "./pages/MyTrip"
 import MyTripAdd from "./pages/MyTripAdd"
@@ -49,6 +50,7 @@ function App() {
           <Route path="/mytripadd" element={<MyTripAdd />} />
           <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
         </Routes>
+        <Footer/>
     </Router>
   )
 }

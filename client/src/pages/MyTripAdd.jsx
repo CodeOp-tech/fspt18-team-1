@@ -116,12 +116,13 @@ function MyTripAdd() {
     };
     
     return (
-        <div>
-            <div>MyTrip</div>
-            <form className="form" onSubmit={handleSubmit}>
+    <div className="login-container">
+       <div className="flex flex-col items-center">
+            <h1 className="pt-14 pb-20">Add Trip</h1>
+            <form className="flex flex-col items-start" onSubmit={handleSubmit}>
                 <div className="form__elementcontainer">
-                    <div className="form__element" >
-                        <label htmlFor="name">MyTrip Name:</label>
+                    <div className="form__element mb-4" >
+                        <label className="w-36 inline-flex" htmlFor="name">MyTrip Name:</label>
                         <input className="form__element__input"
                             id="name"
                             name="name"
@@ -130,8 +131,9 @@ function MyTripAdd() {
                             onChange={handleChange}
                             placeholder="New Mytrip Name"
                         />
+                        <p></p>
                     </div>
-                    <div className="form__element" >
+                    <div className="form__element mb-4" >
                         {/* html for vincula en labels con el id del input */}
                         <label htmlFor="coordinates">Where:</label>
                         <input className="form__element__input"
@@ -142,8 +144,9 @@ function MyTripAdd() {
                             onChange={handleChange}
                             placeholder="Add coordinates"
                         />
+                         <p></p>
                     </div>
-                    <div className="form__element" >
+                    <div className="form__element mb-4" >
                         <label htmlFor="date">When:</label>
                         <input className="form__element__input"
                             id="date"
@@ -153,8 +156,11 @@ function MyTripAdd() {
                             onChange={handleChange}
                             placeholder="Add date"
                         />
+                         <p></p>
                     </div>
-                    <div className="form__element" >
+
+                    <p></p>
+                    <div className="form__element mb-4" >
                         <label htmlFor="name">MyTrip Notes:</label>
                         <textarea className="form__element__input"
                             id="description"
@@ -164,14 +170,18 @@ function MyTripAdd() {
                             onChange={handleChange}
                             placeholder="Write your notes here"
                         />
+                         <p></p>
                     </div>
-                    <div className="form__element">
+                    <div className="form__element mb-4" >
+                    <p></p>
                         <button className="button button__add" type="submit"> {trip_id ? 'Save' : '+'} </button>
+                        
                         <button className="button button__cancel" onClick={handleCancel}>Cancel</button>
                     </div>
                 </div>
             </form>
         </div>
+    </div>
     )
 };
 

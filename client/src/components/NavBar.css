@@ -1,22 +1,48 @@
 
         nav {
             width: 100%;
-            background-color: #333; /* Color de fondo de la barra de navegación */
+            background-color: #527291; /* Color de fondo de la barra de navegación */
             color: #fff; /* Color del texto en la barra de navegación */
-            padding: 10px 0; /* Espacio interno en la barra de navegación */
+            padding: 20px 0; /* Espacio interno en la barra de navegación */
+            
         }
+
 
         ul {
             list-style-type: none; /* Elimina los puntos de la lista */
             padding: 0;
             margin: 0;
-            text-align: center; /* Centra los elementos de la lista horizontalmente */
+            text-align: right; /* Centra los elementos de la lista horizontalmente */
+            position: inherit;
         }
 
         li {
             display: inline-block; /* Muestra los elementos en línea */
-            margin-right: 20px; /* Espacio entre elementos */
+            margin-right: 30px; /* Espacio entre elementos */
+            
+            
         }
+
+        
+        .continentes {
+           
+            display: flex;
+            flex-wrap: wrap; /* Permite que los elementos se envuelvan si no caben en una línea */
+            justify-content: center; /* Alinea los elementos al centro horizontal */
+            position: inherit;
+        }
+            
+
+        
+        .continentes li {
+            list-style: none; /* Quitar los marcadores de lista */
+            display: inline-block; /* Mostrar elementos en línea */
+            margin-left: 30px; /* Espacio entre elementos (puedes ajustarlo según tus necesidades) */
+            
+        }
+  
+
+
 
         /* Estilos para los enlaces */
         a {

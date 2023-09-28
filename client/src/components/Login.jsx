@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import "./Login.css";
 
 const HOSTNAME = "/api";
 
@@ -30,30 +31,35 @@ function Login() {
         }
       };
 
-      return(
-        <div>
-            <div>
-                <input
-                    value={username}
-                    onChange={handleChange}
-                    name="username"
-                    type="text"
-                    className=""
-                />
-                <input
-                    value={password}
-                    onChange={handleChange}
-                    name="password"
-                    type="password"
-                    className=""
-                />
-                <button className="" onClick={login}>
-                    Log in
-                </button>
-                <Link to="/signup"> Don't have an account?</Link>
-                </div>
-        </div>
-      )
-    
-}
+  return (
+  <div className="login-container">
+    <div className='flex flex-col items-center'>
+      <h1 className="pt-14 pb-20">Login</h1>
+      <form className="flex flex-col items-start" onSubmit={(e) => handleSubmit(e)}></form>
+        <label className="w-36 inline-flex" htmlFor="name">User name</label>
+        <input className="w-80"
+        
+          value={username}
+          onChange={handleChange}
+          name="username"
+          type="text"
+        />
+        <p></p>
+        <label className="w-36 inline-flex" htmlFor="email">Password</label>
+        <input className="w-80"
+          value={password}
+          onChange={handleChange}
+          name="password"
+          type="password"
+        />
+        <p></p>
+        <button className="my-20 mx-52" type="submit" class="login-fieldset-submit">
+          Log in
+        </button>
+        <Link to="/signup"> Don't have an account?</Link>
+      </div>
+</div>
+  );
+};
+
 export default Login;

@@ -24,14 +24,17 @@ function Trips() {
     }
 
     return (
-        <div>
-            <div>Trips</div>
+        <div className="flex flex-col items-center">
+            <h1 className="pt-14 pb-20">Trips</h1>
+            <div className="p-4"></div>
+            <div className="grid grid-cols-4 gap-6">
             {Trips.map((trip) => (
                 <Link key={trip.id} to={`/trips/${trip.id}`}>
                     <li >{trip.name}</li>
                 </Link>
-            ))}
 
+            ))}
+             </div>
         </div>
     )
 }

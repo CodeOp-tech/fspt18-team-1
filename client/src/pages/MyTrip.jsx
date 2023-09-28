@@ -47,12 +47,17 @@ function MyTrip() {
     };
 
     return (
-        <div>
-            <div>MyTrip</div>
+        <div className="flex flex-col items-center">
                 <div key={trip.id}>
-                    <li>{trip.name}</li>
+                <h1 className="pt-14 pb-20">{trip.name}</h1>
+                    <p className="flex mb-8"></p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque sit culpa quibusdam harum eligendi nostrum, sunt omnis debitis asperiores. Harum nulla ex dolores, temporibus alias blanditiis quos obcaecati dignissimos fugit?.</p>
+            <div className="p-4"></div>
                     <button className="" onClick={() => handleDelete(trip.id)}>Delete</button>
+
                     <button className="" onClick={handleEdit}>Edit</button>
+                    <div className="p-4">
+                    </div>
                 </div>
         </div>
     )
