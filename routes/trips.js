@@ -2,6 +2,12 @@ var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
 
+
+
+
+
+
+
 /********* TRIPS **********/
 /* GET ALL - todos los trips de la BBDD*/
 router.get("/", (req, res) => {
