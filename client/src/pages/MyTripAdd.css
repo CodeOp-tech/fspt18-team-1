@@ -1,0 +1,8 @@
+.contenedor-button {
+    display: flex; /* Puedes utilizar flexbox para alinear los botones */
+  }
+  
+  .button {
+    margin-right: 10px; /* Agrega margen a la derecha del botón para crear espacio */
+    margin-left: 10pax;
+  }

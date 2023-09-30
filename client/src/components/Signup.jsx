@@ -9,7 +9,7 @@ function Signup() {
     email: '',
     nationality: '',
     birthdate: '',
-    foto: null,
+    //foto: null,
   });
 
   const handleInputChange = (e) => {
@@ -32,6 +32,7 @@ function Signup() {
         } else {
           console.error('Registration failed');
         }
+        
       } catch (error) {
         console.error('Error:', error);
       }
@@ -107,8 +108,7 @@ function Signup() {
           />
         </div>
         <div>
-        <button type="submit">Registrarse</button>
-          <Link to="/login">Iniciar Sesión</Link>
+          <Link to="/login">Register</Link>
         </div>
       </form>
     </div>

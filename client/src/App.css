@@ -1,48 +1,56 @@
 /* GENERAL */ 
 
 
-#root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  max-width: 1280px;
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  font-weight: 500;
   text-align: center;
-  --color-primary: #75a4c1;   /* Color principal */
+  --color-primary: #dde5ed;   /* Color principal */
   --color-secondary: #527291; /* Color secundario */
   --color-tertiary: #b5bdc9;  /* Color terciario */
-  background-color: var(--color-primary);
+  background-color: var(--color-primary); 
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
-  font-family: 'Courier New', Courier, monospace;
 }
 
 body {
-  height: 100%;
   margin: 0;
-  padding: 0;
-  background-color: var(--color-primary);
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
 
 }
 
 p {
-  text-align: justify;
+  text-align: center;
 }
 
 .container {
-  width: 80%; /* Porcentaje en lugar de píxeles */
+  width: 100%; /* Porcentaje en lugar de píxeles */
   margin: 0 auto; /* Centrar horizontalmente */
-  background-color: var(--color-tertiary);;
+  background-color: var(--color-secondary);;
 }
 
 
 h1 {
-  font-size: 3.2em;
+  font-size: 2.0em;
   line-height: 1.1;
-  text-align: right;
+  text-align: center;
+}
+
+h2 {
+    font-size: 1.3em;
+    line-height: 1.1;
+    font-weight: normal;
+    text-align: center;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
+  border-radius: 10px;
+  border: 2px solid;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
@@ -52,7 +60,28 @@ button {
   background-color: var(--color-tertiary); /* Fondos de botones con el color terciario */
 }
 
+button:hover {
+  border-width: 2px;
+  border-style: solid;
+  border-color: var(--color-secondary);
+  padding: 0.6em 1.2em; 
+}
+
+
+input {
+  color-scheme: light;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--color-tertiary);
+  padding:5px; 
+  text-align: center;
+}
+
 
 .nav-link {
-  color: var(--color-secondary); /* Enlaces de navegación con el color secundario */
+  color: var(--color-primary); /* Enlaces de navegación con el color secundario */
+}
+
+label {
+  margin-right: 10px; /* Ajusta el margen derecho según tus necesidades */
 }

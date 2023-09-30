@@ -3,11 +3,12 @@ import './App.css'
 import NavBar from './components/NavBar';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Logout from './components/Logout';
+import Footer from './components/Footer/';
+import RegistrationForm from './pages/RegistrationForm';
 import MyTrip from "./pages/MyTrip"
 import MyTripAdd from "./pages/MyTripAdd"
 import Trips from "./pages/Trips"
-import RegistrationForm from './pages/RegistrationForm';
-import Logout from './components/Logout';
 import PrivateRoute from './components/PrivateRoute'
 
 import {
@@ -33,6 +34,7 @@ function App() {
       element={
         <PrivateRoute>
           <Route path="/mytrip" element={<MyTrip />} />
+          <Route path="/trips/:trip_id" element={<MyTrip />} />
           <Route path="/trips/:trip_id" element={<MyTrip />} />
           <Route path="/mytripadd" element={<MyTripAdd />} />
           <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
