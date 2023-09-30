@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useNavigate } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import "./Login.css";
@@ -18,6 +18,12 @@ function Login() {
     setCredentials({ ...credentials, [name]: value });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  };
+
+  const navigate = useNavigate();
+
   const login = async () => {
     try {
       const { data } = await axios(`${HOSTNAME}/users/login`, {
@@ -26,6 +32,7 @@ function Login() {
       });
       localStorage.setItem("token", data.token);
       console.log(data.message, data.token);
+      navigate('/trips');
     } catch (error) {
       console.log(error);
     }
@@ -53,7 +60,7 @@ function Login() {
           type="password"
         />
         <p></p>
-        <button className="my-20 mx-52" type="submit" class="login-fieldset-submit">
+        <button onClick={login} type="submit" className="login-fieldset-submit">
           Log in
         </button>
         <Link to="/signup"> Don't have an account?</Link>

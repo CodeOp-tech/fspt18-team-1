@@ -34,15 +34,14 @@ function App() {
       element={
         <PrivateRoute>
           <Route path="/mytrip" element={<MyTrip />} />
-          <Route path="/trips/:trip_id" element={<MyTrip />} />
-          <Route path="/trips/:trip_id" element={<MyTrip />} />
           <Route path="/mytripadd" element={<MyTripAdd />} />
           <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
-          <MyTripAdd />
+          <Route path="/tripdetails/:trip_id" element={<MyTrip />} />
         </PrivateRoute>
       }
       />
         </Routes>
+        <Footer/>
     </BrowserRouter>
     </div>
   )
