@@ -8,7 +8,7 @@ function Logout() {
 
   return (
     <div>
-      <button onClick={handleLogout}>Cerrar Sesión</button>
+      <button onClick={handleLogout}>Log out</button>
     </div>
   );
 }
