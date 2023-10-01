@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useNavigate } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import "./Login.css";
@@ -6,33 +6,40 @@ import "./Login.css";
 const HOSTNAME = "/api";
 
 function Login() {
-    const [credentials, setCredentials] = useState({
-        username: "",
-        password: "",
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+  });
+
+  const { username, password } = credentials;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials({ ...credentials, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  };
+
+  const navigate = useNavigate();
+
+  const login = async () => {
+    try {
+      const { data } = await axios(`${HOSTNAME}/users/login`, {
+        method: "POST",
+        data: credentials,
       });
-
-    const { username, password } = credentials;
-    
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setCredentials({ ...credentials, [name]: value });
-      };
-
-      const login = async () => {
-        try {
-          const { data } = await axios(`${HOSTNAME}/users/login`, {
-            method: "POST",
-            data: credentials,
-          });
-          localStorage.setItem("token", data.token);
-          console.log(data.message, data.token);
-        } catch (error) {
-          console.log(error);
-        }
-      };
+      localStorage.setItem("token", data.token);
+      console.log(data.message, data.token);
+      navigate('/trips');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-  <div className="login-container">
+    <div className="login-container">
     <div className='flex flex-col items-center'>
       <h1 className="pt-14 pb-20">Login</h1>
       <form className="flex flex-col items-start" onSubmit={(e) => handleSubmit(e)}></form>
@@ -53,13 +60,13 @@ function Login() {
           type="password"
         />
         <p></p>
-        <button className="my-20 mx-52" type="submit" class="login-fieldset-submit">
+        <button onClick={login} type="submit" className="login-fieldset-submit">
           Log in
         </button>
         <Link to="/signup"> Don't have an account?</Link>
       </div>
 </div>
   );
-};
+}
 
 export default Login;

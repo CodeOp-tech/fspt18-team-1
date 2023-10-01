@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css'
 import NavBar from './components/NavBar';
 import Signup from './components/Signup';
@@ -9,49 +9,41 @@ import RegistrationForm from './pages/RegistrationForm';
 import MyTrip from "./pages/MyTrip"
 import MyTripAdd from "./pages/MyTripAdd"
 import Trips from "./pages/Trips"
-
+import PrivateRoute from './components/PrivateRoute'
 
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Routes,
-  Route,
-  Navigate,
-
+  Route
 } from "react-router-dom";
 
 
 function App() {
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    // Verificar la autenticación si hay un token en el almacenamiento local
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, []);
-  
   return (
-    <Router>
+    <div className=''>
+    <BrowserRouter>
       <NavBar/>
       <Routes>
-      {isLoggedIn ? (
-        <Route path="/trips" element={<Trips />} />
-        ) : (
-          <Route path="/registration-form" element={<RegistrationForm />} />
-        )}
-          <Route path="/trips" element={<Trips />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/logout" element={<Logout />} /> 
-          <Route path="/login" element={<Login />} />
+      <Route path="/" element={<RegistrationForm />} />
+      <Route path="/trips" element={<Trips />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/logout" element={<Logout />} />
+      <Route 
+      path='/private'
+      element={
+        <PrivateRoute>
           <Route path="/mytrip" element={<MyTrip />} />
-          <Route path="/trips/:trip_id" element={<MyTrip />} />
           <Route path="/mytripadd" element={<MyTripAdd />} />
           <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
+          <Route path="/tripdetails/:trip_id" element={<MyTrip />} />
+        </PrivateRoute>
+      }
+      />
         </Routes>
         <Footer/>
-    </Router>
+    </BrowserRouter>
+    </div>
   )
 }
 export default App;
