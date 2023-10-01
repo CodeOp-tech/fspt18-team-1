@@ -21,7 +21,7 @@ const upload = multer({ dest: './public/images' })
 /********* IMAGES **********/
 
 /* GET by Id */
-router.get("/:trip_id", (req, res) => {
+router.get("/images/:trip_id", (req, res) => {
     // Obtén el ID del viaje desde los parámetros de la URL
     const tripId = req.params.trip_id;
     // llama a la lista completa de trips atraves de la funcion db
