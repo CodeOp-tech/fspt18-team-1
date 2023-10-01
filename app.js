@@ -7,7 +7,6 @@ var logger = require('morgan');
 var apiRouter = require('./routes/api');
 var usersRouter = require('./routes/users');
 var tripsRouter = require('./routes/trips');
-var imagesRouter = require('./routes/images');
 var placesRouter = require('./routes/places');
 
 var app = express();
@@ -23,7 +22,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', apiRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/trips', tripsRouter);
-app.use('/api/images', imagesRouter);
 app.use('/api/places', placesRouter);
 
 
