@@ -30,7 +30,7 @@ function MyTrip() {
 
     //llama a la base de datos y trae el iamgen del trip
     const getImage = () =>{
-        fetch(`http://localhost:5000/api/images/${trip_id}`)
+        fetch(`http://localhost:5000/api/trips/images/${trip_id}`)
         .then((response) => response.json())
         .then((data)=>{
             setImage(data[0]);
