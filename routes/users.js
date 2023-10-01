@@ -64,11 +64,14 @@ router.post("/login", async (req, res) => {
 
 /* GET user profile */
 
-router.get("/profile", userShouldBeLoggedIn, (req, res) => {
-  res.send({
-    
-    message: "Here is the PROTECTED data for user " + req.user_id,
+router.get("/profile", userShouldBeLoggedIn, async (req, res) => {
+  const id = req.user_id;
+    db(`SELECT * FROM users WHERE id = "${id}"`)
+    .then(results => {
+      res.send(results.data[0]);
+  })
+  .catch(error => res.status(500).send(error));
   });
-})
+
 
 module.exports = router;
