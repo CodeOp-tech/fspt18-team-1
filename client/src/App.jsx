@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import './App.css'
 import NavBar from './components/NavBar';
 import Signup from './components/Signup';
@@ -19,6 +19,20 @@ import {
 
 
 function App() {
+  
+  const [user, setUser] = useState(null);
+
+  const getUser = () => {
+    fetch('http://localhost:5000/api/users/profile/')
+        .then((response) => response.json())
+        .then((data) => {
+            setUser(data);
+        })
+        .catch(() => {
+            console.log("Oops! Something went wrong")
+        });
+}
+  
   return (
     <div className=''>
     <BrowserRouter>
@@ -26,7 +40,8 @@ function App() {
       <Routes>
       <Route path="/" element={<RegistrationForm />} />
       <Route path="/trips" element={<Trips />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/trips/:trip_id" element={<MyTrip />} />
+      <Route path="/login" element={<Login getUser={getUser} />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/logout" element={<Logout />} />
       <Route 
@@ -36,7 +51,7 @@ function App() {
           <Route path="/mytrip" element={<MyTrip />} />
           <Route path="/mytripadd" element={<MyTripAdd />} />
           <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
-          <Route path="/tripdetails/:trip_id" element={<MyTrip />} />
+          
         </PrivateRoute>
       }
       />

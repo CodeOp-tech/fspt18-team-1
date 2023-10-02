@@ -1,11 +1,11 @@
-import React, { useState, useNavigate } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./Login.css";
 
 const HOSTNAME = "/api";
 
-function Login() {
+function Login(props) {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -31,6 +31,7 @@ function Login() {
         data: credentials,
       });
       localStorage.setItem("token", data.token);
+      props.getUser();
       console.log(data.message, data.token);
       navigate('/trips');
     } catch (error) {
