@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 import NavBar from './components/NavBar';
 import Signup from './components/Signup';
@@ -23,7 +23,9 @@ function App() {
   const [user, setUser] = useState(null);
 
   const getUser = () => {
-    fetch('http://localhost:5000/api/users/profile/')
+    fetch ('http://localhost:5000/api/users/profile/', {
+      headers: {authorization:`Bearer ${localStorage.getItem("token")}`}
+    })
         .then((response) => response.json())
         .then((data) => {
             setUser(data);
@@ -31,17 +33,24 @@ function App() {
         .catch(() => {
             console.log("Oops! Something went wrong")
         });
+
 }
+
+useEffect(() => {
+  getUser();
+}, [])
+console.log(user); 
   
   return (
     <div className=''>
     <BrowserRouter>
       <NavBar/>
       <Routes>
-      <Route path="/" element={<RegistrationForm />} />
+      {/* <Route path="/" element={<RegistrationForm />} /> */}
+      <Route path="/" element={<Trips />} />
       <Route path="/trips" element={<Trips />} />
       <Route path="/trips/:trip_id" element={<MyTrip />} />
-      <Route path="/login" element={<Login getUser={getUser} />} />
+      <Route path="/login" element={<Login getUser={getUser}/>} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/logout" element={<Logout />} />
       <Route 

@@ -38,7 +38,7 @@ function Login(props) {
       console.log(error);
     }
   };
-
+  console.log(props);
   return (
     <div className="login-container">
     <div className='flex flex-col items-center'>

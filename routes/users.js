@@ -66,6 +66,7 @@ router.post("/login", async (req, res) => {
 
 router.get("/profile", userShouldBeLoggedIn, async (req, res) => {
   const id = req.user_id;
+  console.log(id),
     db(`SELECT * FROM users WHERE id = "${id}"`)
     .then(results => {
       res.send(results.data[0]);
