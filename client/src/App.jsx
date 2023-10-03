@@ -60,7 +60,6 @@ console.log(user);
           <Route path="/mytrip" element={<MyTrip />} />
           <Route path="/mytripadd" element={<MyTripAdd />} />
           <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
-          
         </PrivateRoute>
       }
       />
