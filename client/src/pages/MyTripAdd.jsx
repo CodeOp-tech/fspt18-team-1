@@ -41,7 +41,7 @@ function MyTripAdd() {
                 coordinates: "",
                 date: "",
                 description: "",
-                imageName: "",
+                // imageName: "",
                 imageDescription: "",
             })
         }
@@ -51,13 +51,13 @@ function MyTripAdd() {
         console.log('File input changed:', event.target.files[0]); // Check if files are defined
         SetImageFile(event.target.files[0]); 
 
-        if (imageFile) {
-            // Agregar el nuevo objeto de imagen a la matriz existente
-            setMyTrip((myTrip) => ({ ...myTrip, imageName: imageFile.name }));
-        } else {
-            // Handle the case where no file was selected
-            console.log('No file selected.');
-        };
+        // if (imageFile) {
+        //     // Agregar el nuevo objeto de imagen a la matriz existente
+        //     setMyTrip((myTrip) => ({ ...myTrip, imageName: imageFile.name }));
+        // } else {
+        //     // Handle the case where no file was selected
+        //     console.log('No file selected.');
+        // };
     };
     
     const handleChange = (event) => {
@@ -90,20 +90,20 @@ function MyTripAdd() {
             } else {
                 // Subir el archivo al servidor
                 const formData = new FormData();
-                formData.append('imageFile', imageFile, imageFile.Name);
+                formData.append('imageFile', imageFile, imageFile.name);
                 //subir mytrip
                 formData.append('user_id', myTrip.user_id);
                 formData.append('name', myTrip.name);
                 formData.append('coordinates', myTrip.coordinates);
                 formData.append('date', myTrip.date);
                 formData.append('description', myTrip.description);
-                formData.append('imageName', myTrip.imageName);
+                // formData.append('imageName', myTrip.imageName);
                 formData.append('imageDescription', myTrip.imageDescription);
                 //Adding a new trip + image file
                 const response = await fetch('http://localhost:5000/api/trips/', {
                     method: 'POST',
                     headers: {
-                        "encType":"multipart/form-data"
+                        "enctype":"multipart/form-data"
                     },
                     body: formData,
                 });
@@ -122,7 +122,7 @@ function MyTripAdd() {
             coordinates: "",
             date: "",
             description: "",
-            imageName: "",
+            // imageName: "",
             imageDescription: "",
         });
     };
@@ -145,7 +145,7 @@ function MyTripAdd() {
             coordinates: "",
             date: "",
             description: "",
-            imageName: "",
+            // imageName: "",
             imageDescription: "",
         });
         // 2. Puedes mostrar un mensaje de confirmación o realizar otras acciones adicionales aquí

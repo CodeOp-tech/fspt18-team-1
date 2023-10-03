@@ -2,20 +2,28 @@ var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
 // mutler and storage to save the images
-
+const path = require("path");
+const { v4: uuidv4 } = require("uuid");
+const mime = require("mime-types");
 const multer = require('multer');
 const fs = require('fs');
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './public/images'); // this is the one Specify the destination directory
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname); // Use the original filename
-    }
-});
-const upload = multer({ storage: storage });
-// const upload = multer({ dest: './public/images/' })
+//need to rename the file in await async
+const { promisify } = require('util');
+const renameAsync = promisify(fs.rename);
+
+
+
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, './public/images'); // this is the one Specify the destination directory
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, file.originalname); // Use the original filename
+//     }
+// });
+// const upload = multer({ storage: storage });
+const upload = multer({ dest: './public/images/' })
 
 // to integrate in trips 
 /********* IMAGES **********/
@@ -60,11 +68,31 @@ router.get("/:trip_id", (req, res) => {
 /* POST - añade una nueva trip */
 //router post va a hacer un uplod de los archivos tambien ->upload.single('file')
 router.post("/", upload.single('imageFile'), async (req, res) => {
-    const imagefile= req.file;
+    //el body que contiene la data a subir de trip
+    const body = req.body;
+    console.log("body request", body)
+
+    // file is available at req.file
+    const imagefile = req.file;
+    // check the extension of the file
+    const extension = mime.extension(imagefile.mimetype);
+
+    // create a new random name for the file
+    const filename = uuidv4() + "." + extension;
+
+    // grab the filepath for the temporary file
+    const tmp_path = imagefile.path;
+    console.log("path temporal del file", tmp_path)
+
+    // construct the new path for the final file
+    const target_path = path.join(__dirname, "../public/images/") + filename;
+    console.log("path definitivo del file", target_path)
+
     try {
-        //el body que contiene la data a subir de trip
-        const body = req.body;
-        console.log("body request", body)
+        // rename the file
+        // await fs.rename(tmp_path, target_path); --Andres using axios
+         // rename the file
+        await renameAsync(tmp_path, target_path);//chatgpt option
 
         //inserta en la tabla trips la data del trip
         const sql = `INSERT INTO trips (user_id,name,coordinates,date,description) VALUES ('${body.user_id}','${body.name}','${body.coordinates}','${body.date}','${body.description}');`; //actualizar parametros
@@ -77,7 +105,7 @@ router.post("/", upload.single('imageFile'), async (req, res) => {
         console.log("ULTIMA TRIPPP Id", lasTrip_Id);
         // Insertar datos en la tabla "images" del imagan del trip
         // await db(`INSERT INTO images (name, trip_id, description) VALUES (?,?,?);`, [body.imageName, lasTrip_Id, body.imageDescription]);
-        await db(`INSERT INTO images (name, trip_id, description) VALUES ('${body.imageName}',${lasTrip_Id},'${body.imageDescription}');`);
+        await db(`INSERT INTO images (name, trip_id, description) VALUES ('${filename}',${lasTrip_Id},'${body.imageDescription}');`);
         // Envía una respuesta de éxito con el código 201
         res.sendStatus(201);
     } catch (error) {
