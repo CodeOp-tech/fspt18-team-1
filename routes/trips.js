@@ -6,16 +6,16 @@ const db = require("../model/helper");
 const multer = require('multer');
 const fs = require('fs');
 
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, './public/images'); // this is the one Specify the destination directory
-//     },
-//     filename: function (req, file, cb) {
-//         cb(null, file.originalname); // Use the original filename
-//     }
-// });
-// const upload = multer({ storage: storage });
-const upload = multer({ dest: './public/images' })
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './public/images'); // this is the one Specify the destination directory
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname); // Use the original filename
+    }
+});
+const upload = multer({ storage: storage });
+// const upload = multer({ dest: './public/images/' })
 
 // to integrate in trips 
 /********* IMAGES **********/
@@ -31,11 +31,6 @@ router.get("/images/:trip_id", (req, res) => {
         })
         .catch(error => res.status(500).send(error));
 });
-
-
-
-
-
 
 
 /********* TRIPS **********/
@@ -64,7 +59,8 @@ router.get("/:trip_id", (req, res) => {
 
 /* POST - añade una nueva trip */
 //router post va a hacer un uplod de los archivos tambien ->upload.single('file')
-router.post("/", upload.single('file'), async (req, res) => {
+router.post("/", upload.single('imageFile'), async (req, res) => {
+    const imagefile= req.file;
     try {
         //el body que contiene la data a subir de trip
         const body = req.body;

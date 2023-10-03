@@ -7,7 +7,7 @@ function MyTrip() {
     const navigate = useNavigate();
     const [trip, setTrip] = useState([]);
     const [isEditFormOpen,setIsEditFormOpen]= useState(false);
-    const [image, setImage]= useState([]);
+    const [image, setImage]= useState(null);
     
     //actualiza la constante myTrips and Images
     useEffect(() => {
@@ -65,10 +65,11 @@ function MyTrip() {
                 <div key={trip.id}>
                 <h1 className="pt-14 pb-20">{trip.name}</h1>
                 <div className="">
-                <img src = {`http://localhost:5000/images/${image.name}`} id={image.id} alt={image.description}/>
+                {image && <img src = {`http://localhost:5000/images/${image.name}`} id={image.id} alt={image.description}/>}
                 </div>
                     <p className="flex mb-8"></p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque sit culpa quibusdam harum eligendi nostrum, sunt omnis debitis asperiores. Harum nulla ex dolores, temporibus alias blanditiis quos obcaecati dignissimos fugit?.</p>
+                    <p>{trip.description}</p>
+                    <p>{trip.date}</p>
             <div className="p-4"></div>
                     <button className="" onClick={() => handleDelete(trip.id)}>Delete</button>
                     <button className="" onClick={handleEdit}>Edit</button>
