@@ -1,0 +1,10 @@
+.trip { 
+    font-weight: bold;
+    border-width: 2px;
+    border-style: dotted;
+    border-color: #03363d;
+    padding:20px;
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
+

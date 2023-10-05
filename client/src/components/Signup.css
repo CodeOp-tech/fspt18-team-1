@@ -1,0 +1,29 @@
+.signup-container {
+    border: 2px solid #ccc;
+    padding: 50 px 120px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 350px;
+    min-height: 300px; 
+    position: inherit;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   
+   
+  }
+
+  .signup-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .signup-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .signup-container label {
+    font-weight: lighter;
+    margin-bottom: 8px;
+  }

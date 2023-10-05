@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import "./Signup.css";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -39,12 +40,12 @@ function Signup() {
     };
 
   return (
-    <div>
-      <h2>Signup</h2>
+    <div className="signup-container">
+      <h1 className="pt-14 pb-20">Signup</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username:</label>
-          <input
+          <input 
             type="text"
             id="username"
             name="username"
@@ -53,6 +54,7 @@ function Signup() {
             required
           />
         </div>
+        <p></p>
         <div>
           <label htmlFor="password">Password:</label>
           <input
@@ -64,6 +66,7 @@ function Signup() {
             required
           />
         </div>
+        <p></p>
         <div>
           <label htmlFor="email">Email:</label>
           <input
@@ -75,6 +78,7 @@ function Signup() {
             required
           />
         </div>
+        <p></p>
         <div>
           <label htmlFor="nationality">Nationality:</label>
           <input
@@ -86,6 +90,7 @@ function Signup() {
             required
           />
         </div>
+        <p></p>
         <div>
           <label htmlFor="birthdate">Birthdate:</label>
           <input
@@ -97,6 +102,7 @@ function Signup() {
             required
           />
         </div>
+        <p></p>
         <div>
           <label htmlFor="foto">Foto:</label>
           <input

@@ -24,19 +24,19 @@ function Trips() {
     }
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="trips">
             <h1 className="pt-14 pb-20">Trips</h1>
-            <div className="p-4"></div>
             <div className="grid grid-cols-4 gap-6">
-            {Trips.map((trip) => (
-                <Link key={trip.id} to={`/trips/${trip.id}`}>
-                    <li >{trip.name}</li>
-                </Link>
-
-            ))}
+                    {Trips.map((trip) => ( 
+                        <Link key={trip.id} to={`/trips/${trip.id}`}>
+                            <trip >{trip.name}</trip>
+                         </Link>
+                    ))}
              </div>
         </div>
     )
 }
+// CREAR COMPONENTE APARTE MAPA // LLAMADA A LA API 
+// CREAR NUEVO ESPACIO COMO EVENTOS (MIS ESPACIOS)
 
 export default Trips

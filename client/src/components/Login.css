@@ -13,14 +13,12 @@
     border-radius: 10px;
     margin: 20px auto;
     max-width: 350px;
-    min-height: 400px; 
+    min-height: 300px; 
     position: inherit;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
    
-   
   }
-
 
   .login-container h1 {
     font-size: 24px;
@@ -48,7 +46,7 @@
   
   .login-container button {
     padding: 10px 16px;
-    background-color: #527291;
+    background-color: #718878;
     color: #fff;
     font-weight: bold;
     border: none;
@@ -57,12 +55,9 @@
   }
   
   .login-container button:hover {
-    background-color: #1991db;
+    background-color: #244235;
   }
-  
 
-
- 
-
-
-
+link { 
+  color: black; 
+}
