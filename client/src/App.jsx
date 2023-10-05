@@ -5,11 +5,11 @@ import Signup from './components/Signup';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Footer from './components/Footer/';
-import RegistrationForm from './pages/RegistrationForm';
 import MyTrip from "./pages/MyTrip"
 import MyTripAdd from "./pages/MyTripAdd"
 import Trips from "./pages/Trips"
 import PrivateRoute from './components/PrivateRoute'
+// import AuthProvider from "./components/AuthProvider";
 
 import {
   BrowserRouter,
@@ -44,9 +44,9 @@ console.log(user);
   return (
     <div className=''>
     <BrowserRouter>
+    {/* <AuthProvider> */}
       <NavBar/>
       <Routes>
-      {/* <Route path="/" element={<RegistrationForm />} /> */}
       <Route path="/" element={<Trips />} />
       <Route path="/trips" element={<Trips />} />
       <Route path="/trips/:trip_id" element={<MyTrip />} />
@@ -65,6 +65,7 @@ console.log(user);
       />
         </Routes>
         <Footer/>
+      {/* </AuthProvider> */}
     </BrowserRouter>
     </div>
   )
