@@ -16,35 +16,24 @@ function MyTripAdd() {
         imageName: "",
         imageDescription: ""
     })
+    const[imageFile,SetImageFile] = useState(null);
 
 
-    const handleFileChange = (event) => {
-        console.log('File input changed:', event.target.files); // Check if files are defined
-        const newFile = event.target.files[0];
-
-        if (newFile) {
-            // Agregar el nuevo objeto de imagen a la matriz existente
-            setMyTrip((myTrip) => ({ ...myTrip, imageName: newFile.name }));
-        } else {
-            // Handle the case where no file was selected
-            console.log('No file selected.');
-        };
-    };
-
-
-
+    
+    
+    
     // Use useEffect to populate the form with existing trip data if it's provided
     useEffect(() => {
         if (trip_id) {
             // Realiza una solicitud al servidor para obtener los datos del viaje por trip_id
             fetch(`http://localhost:5000/api/trips/${trip_id}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    setMyTrip(data[0]);
-                })
-                .catch((error) => {
-                    console.log('Oops! Something went wrong');
-                });
+            .then((response) => response.json())
+            .then((data) => {
+                setMyTrip(data[0]);
+            })
+            .catch((error) => {
+                console.log('Oops! Something went wrong');
+            });
         } else {
             setMyTrip({
                 user_id: "1",
@@ -52,12 +41,25 @@ function MyTripAdd() {
                 coordinates: "",
                 date: "",
                 description: "",
-                imageName: "",
+                // imageName: "",
                 imageDescription: "",
             })
         }
     }, [trip_id]);
+    
+    const handleFileChange = (event) => {
+        console.log('File input changed:', event.target.files[0]); // Check if files are defined
+        SetImageFile(event.target.files[0]); 
 
+        // if (imageFile) {
+        //     // Agregar el nuevo objeto de imagen a la matriz existente
+        //     setMyTrip((myTrip) => ({ ...myTrip, imageName: imageFile.name }));
+        // } else {
+        //     // Handle the case where no file was selected
+        //     console.log('No file selected.');
+        // };
+    };
+    
     const handleChange = (event) => {
         //cada elemento del event target
         const element = event.target;
@@ -86,25 +88,23 @@ function MyTripAdd() {
                     navigate('/trips');
                 };
             } else {
-                console.log("evento en submit", event.target)
-                //get archivo imagen
-                const newFile = event.target.file; // Obtener el archivo
-                //const newFile = e.target[0].file[0]; // Obtener el archivo
-                console.log("evento en submit File", newFile)
                 // Subir el archivo al servidor
                 const formData = new FormData();
-                formData.append('file', newFile);
+                formData.append('imageFile', imageFile, imageFile.name);
                 //subir mytrip
                 formData.append('user_id', myTrip.user_id);
                 formData.append('name', myTrip.name);
                 formData.append('coordinates', myTrip.coordinates);
                 formData.append('date', myTrip.date);
                 formData.append('description', myTrip.description);
-                formData.append('imageName', myTrip.imageName);
+                // formData.append('imageName', myTrip.imageName);
                 formData.append('imageDescription', myTrip.imageDescription);
                 //Adding a new trip + image file
                 const response = await fetch('http://localhost:5000/api/trips/', {
                     method: 'POST',
+                    headers: {
+                        "enctype":"multipart/form-data"
+                    },
                     body: formData,
                 });
 
@@ -122,7 +122,7 @@ function MyTripAdd() {
             coordinates: "",
             date: "",
             description: "",
-            imageName: "",
+            // imageName: "",
             imageDescription: "",
         });
     };
@@ -145,7 +145,7 @@ function MyTripAdd() {
             coordinates: "",
             date: "",
             description: "",
-            imageName: "",
+            // imageName: "",
             imageDescription: "",
         });
         // 2. Puedes mostrar un mensaje de confirmación o realizar otras acciones adicionales aquí
@@ -158,7 +158,7 @@ function MyTripAdd() {
         <div className="login-container">
             <div className="flex flex-col items-center">
                 <h1 className="pt-14 pb-20">Add Trip</h1>
-                <form className="flex flex-col items-start" encType="multipart/form-data" onSubmit={handleSubmit}>
+                <form className="flex flex-col items-start" onSubmit={handleSubmit}>
                     <div className="form__elementcontainer">
                         <div className="form__element mb-4" >
                             <label className="w-36 inline-flex" htmlFor="name">MyTrip Name:</label>
