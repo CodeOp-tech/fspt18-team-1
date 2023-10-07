@@ -40,6 +40,7 @@ function Login(props) {
 
 
   return (
+    <div className="page-container">
     <div className="login-container">
       <div className='flex flex-col items-center'>
         <h1 className="pt-14 pb-20"> Login </h1>
@@ -73,7 +74,7 @@ function Login(props) {
         </form>
         
       </div>
-      
+      </div>
     </div>
   );
 }
