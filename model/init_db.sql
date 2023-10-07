@@ -43,15 +43,15 @@ CREATE TABLE `trips`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT UNSIGNED NOT NULL,
     `name` VARCHAR(255) NOT NULL,
-    `coordinates` VARCHAR(255) NOT NULL,
-    `date` DATE NOT NULL,
-    `description` LONGTEXT NOT NULL
+    `coordinates` VARCHAR(255),
+    `date` DATE,
+    `description` LONGTEXT
 );
 CREATE TABLE `images`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(255) NOT NULL,
+    `name` VARCHAR(255) ,
     `trip_id` INT UNSIGNED NOT NULL,
-    `description` MEDIUMTEXT NOT NULL
+    `description` MEDIUMTEXT 
 );
 CREATE TABLE `places`(
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,

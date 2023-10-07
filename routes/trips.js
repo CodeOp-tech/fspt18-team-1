@@ -12,17 +12,15 @@ const fs = require('fs');
 const { promisify } = require('util');
 const renameAsync = promisify(fs.rename);
 
+// Create a function to format the date as "YYYY-MM-DD"
+function formatDateToHTMLCalendar(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Adding 1 because months are zero-based
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
 
-
-// const storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, './public/images'); // this is the one Specify the destination directory
-//     },
-//     filename: function (req, file, cb) {
-//         cb(null, file.originalname); // Use the original filename
-//     }
-// });
-// const upload = multer({ storage: storage });
+//Multer upload function of files  
 const upload = multer({ dest: './public/images/' })
 
 // to integrate in trips 
@@ -52,16 +50,57 @@ router.get("/", (req, res) => {
         .catch(error => res.status(500).send(error));
 });
 
-/* GET by Id - todos los trips de la BBDD*/
-router.get("/:trip_id", (req, res) => {
+
+
+
+/* GET by Id - trip de la BBDD*/
+router.get("/:trip_id", async (req, res) => {
+
     // Obtén el ID del viaje desde los parámetros de la URL
     const tripId = req.params.trip_id;
-    // llama a la lista completa de trips atraves de la funcion db
-    db(`SELECT * FROM trips WHERE id =${tripId};`)
-        .then(results => {
-            res.send(results.data);
-        })
-        .catch(error => res.status(500).send(error));
+    try {
+        // llama a la lista de trips atraves de la funcion db
+        const resultsTripCall = `SELECT * FROM trips WHERE id =${tripId};`
+        const resultsTrip = await db(resultsTripCall);
+        console.log("resultados de llamada a trip", resultsTrip.data)
+        //trip a enviar para editar un viaje
+        if (!resultsTrip.data.length) {
+            return res.status(404).json({ message: "Trip not found" });
+        }
+
+        // llama a la lista de images atraves de la funcion db
+        const resultsImagesCall = `SELECT * FROM images WHERE trip_id =${tripId};`
+        const resultsImages = await db(resultsImagesCall);
+        console.log("resultados de llamada a images", resultsImages.data)
+        //trip a enviar para editar un viaje
+        if (!resultsImages.data.length) {
+            return res.status(404).json({ message: "Trip not found" });
+        }
+
+        //transform date String to html readable date
+        // Original date string
+        const originalDateString = resultsTrip.data[0].date;
+        // Parse the original date string into a JavaScript Date object
+        const originalDate = new Date(originalDateString);
+        // Format the date for HTML calendar input
+        const formattedDate = formatDateToHTMLCalendar(originalDate);
+
+        const trip = {
+            user_id: resultsTrip.data[0].user_id,
+            name: resultsTrip.data[0].name,
+            coordinates: resultsTrip.data[0].coordinates,
+            date: formattedDate,
+            description: resultsTrip.data[0].description,
+            imageName: resultsImages.data[0].name,
+            imageDescription: resultsImages.data[0].description,
+        };
+        //enviar la data del trip
+        res.send(trip);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
 });
 
 
@@ -115,15 +154,58 @@ router.post("/", upload.single('imageFile'), async (req, res) => {
 });
 
 /* PUT - edita un trip */
-router.put("/:trip_id", async (req, res) => {
+router.put("/:trip_id", upload.single('imageFile'), async (req, res) => {
+
+    ///el body que contiene la data a actualizar
+    const body = req.body;
+    // Los parámetros de la URL que están disponibles en req.params
+    const id = req.params.trip_id;
+
+    // file is available at req.file
+    const imagefile = req.file;
+    // check the extension of the file
+    const extension = mime.extension(imagefile.mimetype);
+
+    // create a new random name for the file
+    const filename = uuidv4() + "." + extension;
+
+    // grab the filepath for the temporary file
+    const tmp_path = imagefile.path;
+    console.log("path temporal del file", tmp_path)
+
+    // construct the new path for the final file
+    const target_path = path.join(__dirname, "../public/images/") + filename;
+    console.log("path definitivo del file", target_path)
+
     try {
-        ///el body que contiene la data a actualizar
-        const body = req.body;
-        // Los parámetros de la URL que están disponibles en req.params
-        const id = req.params.trip_id;
+        // Check if the trip exists and retrieve its current image information
+        const trip = await db(`SELECT * FROM trips WHERE id = ${id}`);
+        console.log("Trip", trip)
+        const image = await db(`SELECT * FROM images WHERE trip_id = ${id}`);
+        console.log("Image", image)
+        if (!trip || !trip.data.length) {
+            return res.status(404).json({ message: "Trip not found" });
+        }
+
+        // Delete the old image file if it exists
+        if (image.data[0].name) {
+            const oldImagePath = `public/images/${image.data[0].name}`;
+            fs.unlink(oldImagePath, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+            await db(`DELETE FROM images WHERE trip_id = ${id}`);
+        }
+
+        // rename the file
+        await renameAsync(tmp_path, target_path);//chatgpt option
+
         //si no hay error se actualiza trips segun el body recibido
-        const sql = `UPDATE trips SET name = '${body.name}', coordinates = '${body.coordinates}', date = '${body.date}', description = '${body.description}' WHERE id = ${id};`;
-        await db(sql);
+        const sqlTripCall = `UPDATE trips SET name = '${body.name}', coordinates = '${body.coordinates}', date = '${body.date}', description = '${body.description}' WHERE id = ${id};`;
+        await db(sqlTripCall);
+        const sqlImageCall = `INSERT INTO images (name, trip_id, description) VALUES ('${filename}',${id},'${body.imageDescription}');`
+        await db(sqlImageCall);
         // Envía una respuesta de éxito con el código 201
         res.sendStatus(201);
     } catch (error) {
@@ -138,6 +220,7 @@ router.delete("/:trip_id", async (req, res) => {
     try {
         // Los parámetros de la URL están disponibles en req.params
         const id = req.params.trip_id;
+        console.log("trip id", image)
         const sqlCallOne = `SELECT * FROM images WHERE trip_id = ${id};`;
         const resultsqlCallOne = await db(sqlCallOne);
         const image = resultsqlCallOne.data[0]

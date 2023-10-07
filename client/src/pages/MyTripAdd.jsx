@@ -29,7 +29,8 @@ function MyTripAdd() {
             fetch(`http://localhost:5000/api/trips/${trip_id}`)
             .then((response) => response.json())
             .then((data) => {
-                setMyTrip(data[0]);
+                setMyTrip(data);
+                console.log("trip data en trip7trip_id", myTrip)
             })
             .catch((error) => {
                 console.log('Oops! Something went wrong');
@@ -41,7 +42,7 @@ function MyTripAdd() {
                 coordinates: "",
                 date: "",
                 description: "",
-                // imageName: "",
+                imageName: "",
                 imageDescription: "",
             })
         }
@@ -76,17 +77,40 @@ function MyTripAdd() {
         try {
             //check if trip data exists- to edit and not create a new trip
             if (trip_id) {
+                console.log("You are on edit mode")
+
                 // Editing an existing trip
+                const formData = new FormData();
+                formData.append('imageFile', imageFile, imageFile.name);
+                //subir mytrip
+                formData.append('user_id', myTrip.user_id);
+                formData.append('name', myTrip.name);
+                formData.append('coordinates', myTrip.coordinates);
+                formData.append('date', myTrip.date);
+                formData.append('description', myTrip.description);
+                // formData.append('imageName', myTrip.imageName);
+                formData.append('imageDescription', myTrip.imageDescription);
+                //Adding a new trip + image file
                 const response = await fetch(`http://localhost:5000/api/trips/${trip_id}`, {
-                    method: "PUT",
+                    method: 'PUT',
                     headers: {
-                        "Content-Type": "application/json",
+                        "enctype":"multipart/form-data"
                     },
-                    body: JSON.stringify(myTrip),
+                    body: formData,
                 });
-                if (response.ok) {
-                    navigate('/trips');
-                };
+
+
+
+                // const response = await fetch(`http://localhost:5000/api/trips/${trip_id}`, {
+                //     method: "PUT",
+                //     headers: {
+                //         "Content-Type": "application/json",
+                //     },
+                //     body: JSON.stringify(myTrip),
+                // });
+                // if (response.ok) {
+                //     navigate('/trips');
+                // };
             } else {
                 // Subir el archivo al servidor
                 const formData = new FormData();
@@ -122,7 +146,7 @@ function MyTripAdd() {
             coordinates: "",
             date: "",
             description: "",
-            // imageName: "",
+            imageName: "",
             imageDescription: "",
         });
     };
@@ -145,7 +169,7 @@ function MyTripAdd() {
             coordinates: "",
             date: "",
             description: "",
-            // imageName: "",
+            imageName: "",
             imageDescription: "",
         });
         // 2. Puedes mostrar un mensaje de confirmación o realizar otras acciones adicionales aquí
