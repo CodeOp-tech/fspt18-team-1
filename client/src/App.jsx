@@ -53,6 +53,7 @@ console.log(user);
       <Route path="/login" element={<Login getUser={getUser}/>} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/logout" element={<Logout />} />
+  
       <Route 
       path='/private'
       element={
