@@ -88,7 +88,8 @@ router.get("/:trip_id", async (req, res) => {
         const trip = {
             user_id: resultsTrip.data[0].user_id,
             name: resultsTrip.data[0].name,
-            coordinates: resultsTrip.data[0].coordinates,
+            latitude: resultsTrip.data[0].latitude,
+            longitude: resultsTrip.data[0].coordinates,
             date: formattedDate,
             description: resultsTrip.data[0].description,
             imageName: resultsImages.data[0].name,
@@ -134,7 +135,7 @@ router.post("/", upload.single('imageFile'), async (req, res) => {
         await renameAsync(tmp_path, target_path);//chatgpt option
 
         //inserta en la tabla trips la data del trip
-        const sqlCallOne = `INSERT INTO trips (user_id,name,coordinates,date,description) VALUES ('${body.user_id}','${body.name}','${body.coordinates}','${body.date}','${body.description}');`; //actualizar parametros
+        const sqlCallOne = `INSERT INTO trips (user_id,name,latitude,longitude,date,description) VALUES ('${body.user_id}','${body.name}',${body.latitude},${body.longitude},'${body.date}','${body.description}');`; //actualizar parametros
         //se adiciona a la tabla usando la funcion db y como parametros se da sql
         await db(sqlCallOne)
         const lasTrip_IdCall = await db(`SELECT MAX(id) FROM trips`)
@@ -195,16 +196,15 @@ router.put("/:trip_id", upload.single('imageFile'), async (req, res) => {
                     console.error(err);
                 }
             });
-            await db(`DELETE FROM images WHERE trip_id = ${id}`);
         }
 
         // rename the file
         await renameAsync(tmp_path, target_path);//chatgpt option
 
         //si no hay error se actualiza trips segun el body recibido
-        const sqlTripCall = `UPDATE trips SET name = '${body.name}', coordinates = '${body.coordinates}', date = '${body.date}', description = '${body.description}' WHERE id = ${id};`;
+        const sqlTripCall = `UPDATE trips SET name = '${body.name}', latitude = ${body.latitude}, longitude = ${body.longitude}, date = '${body.date}', description = '${body.description}' WHERE id = ${id};`;
         await db(sqlTripCall);
-        const sqlImageCall = `INSERT INTO images (name, trip_id, description) VALUES ('${filename}',${id},'${body.imageDescription}');`
+        const sqlImageCall = `UPDATE images SET name ='${filename}', trip_id = ${id}, description = '${body.imageDescription}' WHERE trip_id = ${id};`
         await db(sqlImageCall);
         // Envía una respuesta de éxito con el código 201
         res.sendStatus(201);

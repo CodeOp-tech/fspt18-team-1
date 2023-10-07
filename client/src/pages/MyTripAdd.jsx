@@ -10,17 +10,14 @@ function MyTripAdd() {
     const [myTrip, setMyTrip] = useState({
         user_id: "1",
         name: "",
-        coordinates: "",
+        latitude: "",
+        longitude: "",
         date: "",
         description: "",
         imageName: "",
         imageDescription: ""
     })
     const[imageFile,SetImageFile] = useState(null);
-
-
-    
-    
     
     // Use useEffect to populate the form with existing trip data if it's provided
     useEffect(() => {
@@ -39,11 +36,12 @@ function MyTripAdd() {
             setMyTrip({
                 user_id: "1",
                 name: "",
-                coordinates: "",
+                latitude: "",
+                longitude: "",
                 date: "",
                 description: "",
                 imageName: "",
-                imageDescription: "",
+                imageDescription: ""
             })
         }
     }, [trip_id]);
@@ -51,14 +49,6 @@ function MyTripAdd() {
     const handleFileChange = (event) => {
         console.log('File input changed:', event.target.files[0]); // Check if files are defined
         SetImageFile(event.target.files[0]); 
-
-        // if (imageFile) {
-        //     // Agregar el nuevo objeto de imagen a la matriz existente
-        //     setMyTrip((myTrip) => ({ ...myTrip, imageName: imageFile.name }));
-        // } else {
-        //     // Handle the case where no file was selected
-        //     console.log('No file selected.');
-        // };
     };
     
     const handleChange = (event) => {
@@ -85,7 +75,8 @@ function MyTripAdd() {
                 //subir mytrip
                 formData.append('user_id', myTrip.user_id);
                 formData.append('name', myTrip.name);
-                formData.append('coordinates', myTrip.coordinates);
+                formData.append('latitude', myTrip.latitude);
+                formData.append('longitude', myTrip.longitude);
                 formData.append('date', myTrip.date);
                 formData.append('description', myTrip.description);
                 // formData.append('imageName', myTrip.imageName);
@@ -98,19 +89,6 @@ function MyTripAdd() {
                     },
                     body: formData,
                 });
-
-
-
-                // const response = await fetch(`http://localhost:5000/api/trips/${trip_id}`, {
-                //     method: "PUT",
-                //     headers: {
-                //         "Content-Type": "application/json",
-                //     },
-                //     body: JSON.stringify(myTrip),
-                // });
-                // if (response.ok) {
-                //     navigate('/trips');
-                // };
             } else {
                 // Subir el archivo al servidor
                 const formData = new FormData();
@@ -118,7 +96,8 @@ function MyTripAdd() {
                 //subir mytrip
                 formData.append('user_id', myTrip.user_id);
                 formData.append('name', myTrip.name);
-                formData.append('coordinates', myTrip.coordinates);
+                formData.append('latitude', myTrip.latitude);
+                formData.append('longitude', myTrip.longitude);
                 formData.append('date', myTrip.date);
                 formData.append('description', myTrip.description);
                 // formData.append('imageName', myTrip.imageName);
@@ -143,11 +122,12 @@ function MyTripAdd() {
         setMyTrip({
             user_id: "1",
             name: "",
-            coordinates: "",
+            latitude: "",
+            longitude: "",
             date: "",
             description: "",
             imageName: "",
-            imageDescription: "",
+            imageDescription: ""
         });
     };
 
@@ -166,11 +146,12 @@ function MyTripAdd() {
         setMyTrip({
             user_id: "1",
             name: "",
-            coordinates: "",
+            latitude: "",
+            longitude: "",
             date: "",
             description: "",
             imageName: "",
-            imageDescription: "",
+            imageDescription: ""
         });
         // 2. Puedes mostrar un mensaje de confirmación o realizar otras acciones adicionales aquí
         alert("No trip added")
@@ -213,15 +194,25 @@ function MyTripAdd() {
                         </div>
                         <p></p>
                         <div className="form__element mb-4" >
+                        <p>Where:</p>
                             {/* html for vincula en labels con el id del input */}
-                            <label htmlFor="coordinates">Where:</label>
+                            <label htmlFor="latitude">Lat:</label>
                             <input className="form__element__input"
-                                id="coordinates"
-                                name="coordinates"
+                                id="latitude"
+                                name="latitude"
                                 type="text"
                                 value={myTrip.coordinates}
                                 onChange={handleChange}
-                                placeholder="Add coordinates"
+                                placeholder="Add latitude eg.23.4"
+                            />
+                            <label htmlFor="longitude">Long:</label>
+                            <input className="form__element__input"
+                                id="longitude"
+                                name="longitude"
+                                type="text"
+                                value={myTrip.coordinates}
+                                onChange={handleChange}
+                                placeholder="Add longitude eg.23.3"
                             />
                             <p></p>
                         </div>
