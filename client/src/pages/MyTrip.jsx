@@ -24,7 +24,7 @@ function MyTrip() {
                 setEditingTrip(data[0]); // Asigna los detalles del viaje a editing Trip
             })
             .catch((error) => {
-                console.log("Oops! Something went wrong")
+                console.log("No trips available")
             });
     };
 

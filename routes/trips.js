@@ -91,21 +91,20 @@ router.post("/", upload.single('imageFile'), async (req, res) => {
     try {
         // rename the file
         // await fs.rename(tmp_path, target_path); --Andres using axios
-         // rename the file
+        // rename the file
         await renameAsync(tmp_path, target_path);//chatgpt option
 
         //inserta en la tabla trips la data del trip
-        const sql = `INSERT INTO trips (user_id,name,coordinates,date,description) VALUES ('${body.user_id}','${body.name}','${body.coordinates}','${body.date}','${body.description}');`; //actualizar parametros
+        const sqlCallOne = `INSERT INTO trips (user_id,name,coordinates,date,description) VALUES ('${body.user_id}','${body.name}','${body.coordinates}','${body.date}','${body.description}');`; //actualizar parametros
         //se adiciona a la tabla usando la funcion db y como parametros se da sql
-        await db(sql)
-
+        await db(sqlCallOne)
         const lasTrip_IdCall = await db(`SELECT MAX(id) FROM trips`)
         console.log("ULTIMA TRIP CAll", lasTrip_IdCall);
         const lasTrip_Id = lasTrip_IdCall.data[0]['MAX(id)'];
         console.log("ULTIMA TRIPPP Id", lasTrip_Id);
         // Insertar datos en la tabla "images" del imagan del trip
-        // await db(`INSERT INTO images (name, trip_id, description) VALUES (?,?,?);`, [body.imageName, lasTrip_Id, body.imageDescription]);
-        await db(`INSERT INTO images (name, trip_id, description) VALUES ('${filename}',${lasTrip_Id},'${body.imageDescription}');`);
+        const sqlCallTwo = `INSERT INTO images (name, trip_id, description) VALUES ('${filename}',${lasTrip_Id},'${body.imageDescription}');`
+        await db(sqlCallTwo);
         // Envía una respuesta de éxito con el código 201
         res.sendStatus(201);
     } catch (error) {
@@ -139,10 +138,24 @@ router.delete("/:trip_id", async (req, res) => {
     try {
         // Los parámetros de la URL están disponibles en req.params
         const id = req.params.trip_id;
-        const sql = `DELETE FROM trips WHERE id = ${id};`;
-        await db(sql);
+        const sqlCallOne = `SELECT * FROM images WHERE trip_id = ${id};`;
+        const resultsqlCallOne = await db(sqlCallOne);
+        const image = resultsqlCallOne.data[0]
+        console.log("result de eliminar una imagen", image)
+        //File to delete path
+        const filePath = `public/images/${image.name}`;
+        //Delete file
+        fs.unlink(filePath, (err) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).send('Error deleting file');
+            }
+        });
+        const sqlCallTwo = `DELETE FROM trips WHERE id = ${id};`
+        await db(sqlCallTwo);
         // Envía una respuesta de éxito con el código 201
-        res.sendStatus(201);
+        console.log(`File ${image.name} and trip deleted successfully`);
+        res.status(200).send('File, image and trip deleted successfully');
     } catch (error) {
         // Si ocurre un error, envía una respuesta de error con el código 500
         console.error(error);
