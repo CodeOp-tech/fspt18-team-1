@@ -53,13 +53,12 @@ console.log(user);
       <Route path="/login" element={<Login getUser={getUser}/>} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/logout" element={<Logout />} />
-      <Route path="/mytripadd" element={<MyTripAdd />} />
-      <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
       <Route 
       path='/private'
       element={
         <PrivateRoute>
-          <Route path="/mytrip" element={<MyTrip />} />
+          <Route path="/mytripadd" element={<MyTripAdd />} />
+          <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
         </PrivateRoute>
       }
       />
