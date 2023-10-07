@@ -1,41 +1,55 @@
+.page-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 600px; /* Ocupa el 100% de la altura de la ventana */
+  margin: 0;
+}
+
+
 .login-page .navbar {
-    display: none;
+  display: none;
 }
 
 /* Ocultar el pie de página en la página de inicio de sesión */
 .login-page .footer {
-    display: none;
+  display: none;
 }
 
+
 .login-container {
-    border: 2px solid #ccc;
-    padding: 50 px 120px;
-    border-radius: 10px;
-    margin: 20px auto;
-    max-width: 350px;
-    min-height: 400px; 
-    position: inherit;
-    background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-   
-   
+  max-width: 350px;
+  margin: 0 auto; /* Centra horizontalmente el contenedor */
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column; /* Apila los elementos verticalmente */
+  align-items: center; /* Centra los elementos horizontalmente */
   }
 
 
   .login-container h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
   }
   
   .login-container form {
+    width: 100%; /* Asegura que el formulario ocupe todo el ancho disponible */
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
   
   .login-container label {
-    font-weight: lighter;
+    font-weight: bold;
     margin-bottom: 8px;
+    text-align: left;
+    width: 100%;
   }
   
   .login-container input[type="text"],
@@ -44,20 +58,33 @@
     margin-bottom: 16px;
     border: 1px solid #e1e8ed;
     border-radius: 4px;
+    width: 80%;
   }
   
   .login-container button {
-    padding: 10px 16px;
-    background-color: #527291;
+    padding: 10px;
+    background-color: #1991db;
     color: #fff;
     font-weight: bold;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
   }
   
   .login-container button:hover {
-    background-color: #1991db;
+    background-color: #527291;
+  }
+
+  .login-container a {
+    text-decoration: none;
+    color: #1991db;
+    font-weight: bold;
+  }
+
+  .login-container a:hover {
+    text-decoration: underline;
   }
   
 

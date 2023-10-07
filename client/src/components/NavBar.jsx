@@ -15,7 +15,7 @@ function NavBar () {
         <Link to="/trips">Trips</Link>
       </li>
       <li>
-        <Link to="/mytripAdd">Add</Link>
+        <Link to="/mytripadd">Add</Link>
       </li>
       <li>
         <Link to="/logout">Logout</Link>
