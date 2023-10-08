@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+//import { AuthenticationContext } from "./AuthContext";
 import "./Login.css";
 
 const HOSTNAME = "/api";
@@ -18,11 +19,19 @@ function Login(props) {
     setCredentials({ ...credentials, [name]: value });
   };
 
+  // const { loginContext } = useContext(AuthenticationContext);
+
+  const navigate = useNavigate();
+
   const login = async () => {
     try {
       const { data } = await axios.post(`${HOSTNAME}/users/login`, credentials);
       localStorage.setItem("token", data.token);
+      
+      // loginContext(data.username);
+
       props.getUser();
+
       console.log(data.message, data.token);
       navigate('/trips');
     } catch (error) {
@@ -34,8 +43,6 @@ function Login(props) {
     e.preventDefault();
     login();
   };
-
-  const navigate = useNavigate();
 
 
 
