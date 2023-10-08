@@ -8,8 +8,8 @@ import Footer from './components/Footer/';
 import MyTrip from "./pages/MyTrip"
 import MyTripAdd from "./pages/MyTripAdd"
 import Trips from "./pages/Trips"
-import Map from "./components/Map";
-//import { AuthenticationProvider } from "./components/AuthProvider";
+import { AuthenticationProvider } from "./components/AuthProvider";
+//import { AuthenticationContext } from './components/AuthContext';
 
 import {
   BrowserRouter,
@@ -33,7 +33,6 @@ function App() {
         .catch(() => {
             console.log("Oops! Something went wrong")
         });
-
 }
 
 useEffect(() => {
@@ -50,24 +49,24 @@ console.log(user);
       <Route path="/" element={<Trips />} />
       <Route path="/trips" element={<Trips />} />
       <Route path="/login" element={<Login getUser={getUser}/>} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/mytripadd" element={<MyTripAdd />} />
+      
+      {/* <Route path="/mytripadd" element={<MyTripAdd />} />
       <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
       <Route path="/trips/:trip_id" element={<MyTrip />} />
-      <Route path="/logout" element={<Logout />} />
+      <Route path="/logout" element={<Logout />} /> */}
       </Routes>
 
-      <Footer/>
-
-    {/* <AuthenticationProvider> */}
-    {/* <Routes>
+    <AuthenticationProvider>  
+     <Routes>
       <Route path="/mytripadd" element={<MyTripAdd />} />
       <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
       <Route path="/trips/:trip_id" element={<MyTrip />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/logout" element={<Logout />} />
-      </Routes> */}
-      {/* </AuthenticationProvider> */}
+      </Routes>
+     </AuthenticationProvider>
 
+      <Footer/>
     </BrowserRouter>
     </div>
   )

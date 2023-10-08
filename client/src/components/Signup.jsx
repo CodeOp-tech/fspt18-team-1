@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthenticationContext } from './AuthContext';
 import "./Signup.css"
 
 function Signup() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { isAuthenticated } = useContext(AuthenticationContext);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate])
+
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -37,6 +47,7 @@ function Signup() {
       }
     } catch (error) {
       console.error('Error:', error);
+      setError("Signup failed. Username or email already used.");
     }
   };
 
@@ -44,6 +55,7 @@ function Signup() {
     <div className="page-container">
     <div className="signup-container">
       <h2>Signup</h2>
+      {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username:</label>
