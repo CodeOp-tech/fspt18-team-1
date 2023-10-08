@@ -8,8 +8,8 @@ import Footer from './components/Footer/';
 import MyTrip from "./pages/MyTrip"
 import MyTripAdd from "./pages/MyTripAdd"
 import Trips from "./pages/Trips"
-import PrivateRoute from './components/PrivateRoute'
-// import AuthProvider from "./components/AuthProvider";
+import { AuthenticationProvider } from "./components/AuthProvider";
+//import { AuthenticationContext } from './components/AuthContext';
 
 import {
   BrowserRouter,
@@ -19,7 +19,7 @@ import {
 
 
 function App() {
-  
+
   const [user, setUser] = useState(null);
 
   const getUser = () => {
@@ -33,7 +33,6 @@ function App() {
         .catch(() => {
             console.log("Oops! Something went wrong")
         });
-
 }
 
 useEffect(() => {
@@ -44,30 +43,30 @@ console.log(user);
   return (
     <div className=''>
     <BrowserRouter>
-    {/* <AuthProvider> */}
       <NavBar/>
+      
       <Routes>
       <Route path="/" element={<Trips />} />
       <Route path="/trips" element={<Trips />} />
+      <Route path="/login" element={<Login getUser={getUser}/>} />
+      
+      {/* <Route path="/mytripadd" element={<MyTripAdd />} />
+      <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
       <Route path="/trips/:trip_id" element={<MyTrip />} />
+      <Route path="/logout" element={<Logout />} /> */}
+      </Routes>
+
+    <AuthenticationProvider>  
+     <Routes>
       <Route path="/mytripadd" element={<MyTripAdd />} />
       <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
-      <Route path="/login" element={<Login getUser={getUser}/>} />
+      <Route path="/trips/:trip_id" element={<MyTrip />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/logout" element={<Logout />} />
-  
-      <Route 
-      path='/private'
-      element={
-        <PrivateRoute>
-          <Route path="/mytripadd" element={<MyTripAdd />} />
-          <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
-        </PrivateRoute>
-      }
-      />
-        </Routes>
-        {/* <Footer/> */}
-      {/* </AuthProvider> */}
+      </Routes>
+     </AuthenticationProvider>
+
+      <Footer/>
     </BrowserRouter>
     </div>
   )
