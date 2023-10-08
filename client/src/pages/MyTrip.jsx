@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from "react-router-dom"
 import "./MyTrip.css";
+import Map from "../components/Map";
 
 function MyTrip() {
     const { trip_id } = useParams();
@@ -56,6 +57,7 @@ function MyTrip() {
         <div className="flex flex-col items-center">
             <div key={trip.id}>
                 <h1 className="pt-14 pb-20">{trip.name}</h1>
+                <Map mapTrip={trip} />
                 <div className="">
                     {trip.imageName && <img src={`http://localhost:5000/images/${trip.imageName}`} id={trip.imageName} alt={trip.imageDescription} />}
                 </div>

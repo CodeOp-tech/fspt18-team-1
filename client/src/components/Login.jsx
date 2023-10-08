@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthenticationContext } from "./AuthContext";
+import { AuthenticationProvider } from './AuthProvider';
 import "./Login.css";
 
 const HOSTNAME = "/api";
@@ -18,15 +20,24 @@ function Login(props) {
     setCredentials({ ...credentials, [name]: value });
   };
 
+   const { loginContext } = useContext(AuthenticationContext);
+   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
   const login = async () => {
     try {
       const { data } = await axios.post(`${HOSTNAME}/users/login`, credentials);
       localStorage.setItem("token", data.token);
+      
+       loginContext(data.username);
+
       props.getUser();
+
       console.log(data.message, data.token);
       navigate('/trips');
     } catch (error) {
       console.log(error);
+      setError("Login failed. Please check your credentials.");
     }
   };
 
@@ -35,8 +46,6 @@ function Login(props) {
     login();
   };
 
-  const navigate = useNavigate();
-
 
 
   return (
@@ -44,6 +53,7 @@ function Login(props) {
     <div className="login-container">
       <div className='flex flex-col items-center'>
         <h1 className="pt-14 pb-20"> Login </h1>
+        {error && <p className="text-red-500">{error}</p>}
         <form className="flex flex-col items-start" onSubmit={handleSubmit}>
             <div>
               <label className="w-36 inline-flex" htmlFor="username">User name</label>
@@ -78,5 +88,11 @@ function Login(props) {
     </div>
   );
 }
+export default function LoginWrapper(props) {
+  return (
+    <AuthenticationProvider>
+      <Login {...props} />
+    </AuthenticationProvider>
+  );
+}
 
-export default Login;
