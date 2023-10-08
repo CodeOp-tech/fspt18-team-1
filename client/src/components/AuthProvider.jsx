@@ -5,11 +5,13 @@ export const AuthenticationProvider = ({ children }) => {
     const [user, setUser] = useState();
   
     const loginContext = (username) => {
+      localStorage.setItem('user', JSON.stringify({ username }));
       setUser({ username });
     };
   
     const logout = () => {
-      setUser();
+      localStorage.removeItem('user');
+      setUser(null);
     };
   
     const value = 

@@ -38,25 +38,21 @@ function App() {
 useEffect(() => {
   getUser();
 }, [])
-console.log(user); 
+// console.log(user); 
   
   return (
     <div className=''>
     <BrowserRouter>
+    <AuthenticationProvider>
       <NavBar/>
       
       <Routes>
       <Route path="/" element={<Trips />} />
       <Route path="/trips" element={<Trips />} />
       <Route path="/login" element={<Login getUser={getUser}/>} />
-      
-      {/* <Route path="/mytripadd" element={<MyTripAdd />} />
-      <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
-      <Route path="/trips/:trip_id" element={<MyTrip />} />
-      <Route path="/logout" element={<Logout />} /> */}
       </Routes>
 
-    <AuthenticationProvider>  
+     
      <Routes>
       <Route path="/mytripadd" element={<MyTripAdd />} />
       <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
