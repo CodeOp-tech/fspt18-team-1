@@ -44,7 +44,6 @@ function Trips() {
                     <Link key={trip.id} to={`/trips/${trip.id}`}>
                         <li >{trip.name}</li>
                     </Link>
-
                 ))}
             </div>
         </div>
