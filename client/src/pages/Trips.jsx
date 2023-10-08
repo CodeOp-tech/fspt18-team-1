@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 
 function Trips() {
 
-    const [Trips, setTrips] = useState([]);
+    const [trips, setTrips] = useState([]);
+    const [emptyTripList, setEmptyTripList] = useState("");
 
     //actualiza la constante myTrips
     useEffect(() => {
@@ -14,10 +15,20 @@ function Trips() {
     //llama a la base de datos y trae todos los viajes
     const getTrips = () => {
         fetch('http://localhost:5000/api/trips/')
-            .then((response) => response.json())
-            .then((data) => {
-                setTrips(data);
-            })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then((data) => {
+            if (!data.length) {
+                setEmptyTripList("Oops! Looks like there are no trips");
+            } else {
+                setEmptyTripList("");
+            }
+            setTrips(data);
+        })
             .catch((error) => {
                 console.log("Oops! Something went wrong")
             });
@@ -28,13 +39,14 @@ function Trips() {
             <h1 className="pt-14 pb-20">Trips</h1>
             <div className="p-4"></div>
             <div className="grid grid-cols-4 gap-6">
-            {Trips.map((trip) => (
-                <Link key={trip.id} to={`/trips/${trip.id}`}>
-                    <li >{trip.name}</li>
-                </Link>
+            {emptyTripList && <p>{emptyTripList}</p>}
+                {trips.map((trip) => (
+                    <Link key={trip.id} to={`/trips/${trip.id}`}>
+                        <li >{trip.name}</li>
+                    </Link>
 
-            ))}
-             </div>
+                ))}
+            </div>
         </div>
     )
 }

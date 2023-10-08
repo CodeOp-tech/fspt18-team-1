@@ -8,7 +8,7 @@ function MyTrip() {
     const [trip, setTrip] = useState([]);
     const [isEditFormOpen, setIsEditFormOpen] = useState(false);
     // const [image, setImage]= useState(null);
-
+    console.log("trip_id", trip_id)
     //actualiza la constante myTrips and Images
     useEffect(() => {
         getTrip();
@@ -28,15 +28,17 @@ function MyTrip() {
             });
     };
 
-    const handleDelete = async (trip_id) => {
+    const handleDelete = async () => {
+        const id = trip_id;
+        console.log("id", id)
         try {
-            if (trip_id) {
-                const response = await fetch(`http://localhost:5000/api/trips/${trip_id}`,
+            if (id) {
+                const response = await fetch(`http://localhost:5000/api/trips/${id}`,
                     { method: 'DELETE' });
-            }
-            if (response.ok) {
-                navigate(`/trips`);
-                return;
+                if (response.ok) {
+                    navigate(`/trips`);
+                    return;
+                }
             }
             console.log("Something went wrong");
         } catch (error) {
@@ -55,7 +57,7 @@ function MyTrip() {
             <div key={trip.id}>
                 <h1 className="pt-14 pb-20">{trip.name}</h1>
                 <div className="">
-                    {trip && <img src={`http://localhost:5000/images/${trip.imageName}`} id={trip.imageName} alt={trip.imageDescription} />}
+                    {trip.imageName && <img src={`http://localhost:5000/images/${trip.imageName}`} id={trip.imageName} alt={trip.imageDescription} />}
                 </div>
                 <p className="flex mb-8"></p>
                 <p>{trip.description}</p>

@@ -50,6 +50,8 @@ console.log(user);
       <Route path="/" element={<Trips />} />
       <Route path="/trips" element={<Trips />} />
       <Route path="/trips/:trip_id" element={<MyTrip />} />
+      <Route path="/mytripadd" element={<MyTripAdd />} />
+      <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
       <Route path="/login" element={<Login getUser={getUser}/>} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/logout" element={<Logout />} />
@@ -64,7 +66,7 @@ console.log(user);
       }
       />
         </Routes>
-        <Footer/>
+        {/* <Footer/> */}
       {/* </AuthProvider> */}
     </BrowserRouter>
     </div>

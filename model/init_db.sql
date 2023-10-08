@@ -74,11 +74,11 @@ ALTER TABLE
 ALTER TABLE
     `places` ADD CONSTRAINT `places_trip_id_foreign` FOREIGN KEY(`trip_id`) REFERENCES `trips`(`id`) ON DELETE CASCADE;
 
---
--- Insert data into tables
---
+-- --
+-- -- Insert data into tables
+-- --
 
-INSERT INTO users (username, password, email, nationality, birthdate, foto) VALUES ('Vanessa', 'password', 'vanessa.cavaco.branco@gmail.com', 'Portuguese', '1990-07-01', 'idfoto');
-INSERT INTO trips (user_id,name,latitude,longitude,date,description) VALUES ('1','MyTripAçores','41.40412445575105', '2.1745114924114657','2023-07-01', 'Description trip to açores');
-INSERT INTO places (trip_id,name,latitude,longitude,day,date,description) VALUES ('1','sagrada familia','41.38733083681041', '2.168190808510549','day 1','2023-08-09','Place description');
-INSERT INTO images ( name,trip_id,description) VALUES ('Azores.jpg','1','fotodescription');
+-- INSERT INTO users (username, password, email, nationality, birthdate, foto) VALUES ('Vanessa', 'password', 'vanessa.cavaco.branco@gmail.com', 'Portuguese', '1990-07-01', 'idfoto');
+-- INSERT INTO trips (user_id,name,latitude,longitude,date,description) VALUES ('1','MyTripAçores','41.40412445575105', '2.1745114924114657','2023-07-01', 'Description trip to açores');
+-- INSERT INTO places (trip_id,name,latitude,longitude,day,date,description) VALUES ('1','sagrada familia','41.38733083681041', '2.168190808510549','day 1','2023-08-09','Place description');
+-- INSERT INTO images ( name,trip_id,description) VALUES ('Azores.jpg','1','fotodescription');
