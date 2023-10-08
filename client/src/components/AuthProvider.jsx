@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { AuthContext } from "./AuthContext";
+import { AuthenticationContext } from "./AuthContext";
 
 export const AuthenticationProvider = ({ children }) => {
     const [user, setUser] = useState();
@@ -12,11 +12,11 @@ export const AuthenticationProvider = ({ children }) => {
       setUser();
     };
   
-    const value = { user, isAutenticated: !!user, loginContext, logout };
+    const value = { user, isAuthenticated: !!user, loginContext, logout };
   
     return (
-      <AuthContext.Provider value={value}>
+      <AuthenticationContext.Provider value={value}>
         {children}
-      </AuthContext.Provider>
+      </AuthenticationContext.Provider>
     );
   };
