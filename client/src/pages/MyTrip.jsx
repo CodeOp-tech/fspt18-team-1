@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import "./MyTrip.css";
 import Map from "../components/Map";
 
+
 function MyTrip() {
     const { trip_id } = useParams();
     const navigate = useNavigate();

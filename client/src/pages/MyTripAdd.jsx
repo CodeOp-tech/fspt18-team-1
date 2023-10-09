@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-
+import { AuthenticationContext } from "../components/AuthContext"
 import "./MyTrip.css";
 
 //tripData prop is to receive data to edit the trip
-function MyTripAdd(user) {
-    console.log("Prop User", user);
+function MyTripAdd() {
+    
     const { trip_id } = useParams();
-    const [userId, setUserId] = useState(0);
-    console.log("constante UserId", userId);
-
+    // const { user_id } = useContext(AuthenticationContext);
+    // const [userId, setUserId] = useState(0);
+    // console.log("constante UserId", user_id);
     const navigate = useNavigate();
     const [myTrip, setMyTrip] = useState({
-        user_id: 0,
         name: "",
         latitude: "",
         longitude: "",
@@ -26,10 +25,10 @@ function MyTripAdd(user) {
 
     // Use useEffect to populate the form with existing trip data if it's provided
     useEffect(() => {
-        setUserId(user.user.id)
-        console.log("User ID before update:", user.user.id);
-        setMyTrip((myTrip) => ({ ...myTrip, user_id: userId }));
-        console.log("User ID after update:", myTrip.user_id);
+        // setUserId(user.user.id)
+        // console.log("User ID before update:", user.user.id);
+        // setMyTrip((myTrip) => ({ ...myTrip, user_id: user_id }));
+        // console.log("User ID after update:", myTrip.user_id);
         if (trip_id) {
             // Realiza una solicitud al servidor para obtener los datos del viaje por trip_id
             fetch(`http://localhost:5000/api/trips/${trip_id}`)
@@ -94,6 +93,7 @@ function MyTripAdd(user) {
                 const response = await fetch(`http://localhost:5000/api/trips/${trip_id}`, {
                     method: 'PUT',
                     headers: {
+                        
                         "enctype": "multipart/form-data"
                     },
                     body: formData,
@@ -108,18 +108,18 @@ function MyTripAdd(user) {
                 console.log("My Trip Object", myTrip);
                 //subir mytrip
 
-                formData.append('user_id', userId);
+                // formData.append('user_id', userId);
                 formData.append('name', myTrip.name);
                 formData.append('latitude', myTrip.latitude);
                 formData.append('longitude', myTrip.longitude);
                 formData.append('date', myTrip.date);
                 formData.append('description', myTrip.description);
-                // formData.append('imageName', myTrip.imageName);
                 formData.append('imageDescription', myTrip.imageDescription);
                 //Adding a new trip + image file
                 const response = await fetch('http://localhost:5000/api/trips/', {
                     method: 'POST',
                     headers: {
+                        "Authorization": `Bearer ${localStorage.getItem('token')}`,
                         "enctype": "multipart/form-data"
                     },
                     body: formData,
