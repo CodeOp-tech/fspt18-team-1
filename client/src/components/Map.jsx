@@ -1,9 +1,6 @@
 import React from 'react';
 import { TileLayer, Marker, Popup } from 'react-leaflet';
 import { MapContainer } from 'https://cdn.esm.sh/react-leaflet/MapContainer'
-
-
-
 function Map(mapTrip) {
   const position = [mapTrip.mapTrip.latitude, mapTrip.mapTrip.longitude];
   console.log('Contenido de mapTrip:', mapTrip, mapTrip.mapTrip.latitude);
@@ -21,8 +18,6 @@ function Map(mapTrip) {
         </Marker>
       </MapContainer> */}
     </div>
-
   );
 }
-
 export default Map;
