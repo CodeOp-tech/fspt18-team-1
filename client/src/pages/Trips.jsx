@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import "./Trips.css";
 import { Link } from 'react-router-dom'
+import { useContext } from 'react';
+import { AuthenticationContext } from '../components/AuthContext';
 
 function Trips(user) {
 

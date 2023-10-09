@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from './AuthContext';
 import "./Signup.css"
 
@@ -11,7 +11,7 @@ function Signup() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/');
+      navigate('/login');
     }
   }, [isAuthenticated, navigate])
 
