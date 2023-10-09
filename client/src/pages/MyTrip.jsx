@@ -9,12 +9,10 @@ function MyTrip() {
     const navigate = useNavigate();
     const [trip, setTrip] = useState([]);
     const [isEditFormOpen, setIsEditFormOpen] = useState(false);
-    // const [image, setImage]= useState(null);
-    console.log("trip_id", trip_id)
+
     //actualiza la constante myTrips and Images
     useEffect(() => {
         getTrip();
-        // getImage();
     }, []);
 
     //llama a la base de datos y trae todos los viajes
@@ -59,7 +57,7 @@ function MyTrip() {
             <div key={trip.id}>
                 <h1 className="pt-14 pb-20">{trip.name}</h1>
                 <h1 className="pt-14 pb-20">{trip.user_id}</h1>
-                <Map mapTrip={trip} />
+                <Map mapTrip={trip}/>
                 <div className="">
                     {trip.imageName && <img src={`http://localhost:5000/images/${trip.imageName}`} id={trip.imageName} alt={trip.imageDescription} />}
                 </div>
