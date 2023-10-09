@@ -1,3 +1,4 @@
+var userShouldBeLoggedIn = require("../guards/userShouldBeLoggedIn");
 var express = require('express');
 var router = express.Router();
 const db = require("../model/helper");
@@ -51,7 +52,18 @@ router.get("/", (req, res) => {
         .catch(error => res.status(500).send(error));
 });
 
-
+/* GET ALL from user id - todos los trips de la BBDD*/
+router.get("/userTrips", userShouldBeLoggedIn ,(req, res) => {
+    // Obtén el ID del usuario desde los parámetros de la URL
+    const userId = req.user_id;
+    // llama a la lista completa de trips atraves de la funcion db
+    db(`SELECT * FROM trips WHERE user_id =${userId}`)
+        .then(results => {
+            console.log(results.data)
+            res.send(results.data);
+        })
+        .catch(error => res.status(500).send(error));
+});
 
 
 /* GET by Id - trip de la BBDD*/
@@ -121,7 +133,7 @@ router.post("/", upload.single('imageFile'), async (req, res) => {
         const body = req.body;
         console.log("body request", body)
         //inserta en la tabla trips la data del trip
-        const sqlCallOne = `INSERT INTO trips (user_id,name,latitude,longitude,date,description) VALUES ('${body.user_id}','${body.name}',${body.latitude},${body.longitude},'${body.date}','${body.description}');`; //actualizar parametros
+        const sqlCallOne = `INSERT INTO trips (user_id,name,latitude,longitude,date,description) VALUES (${body.user_id},'${body.name}',${body.latitude},${body.longitude},'${body.date}','${body.description}');`; //actualizar parametros
         await db(sqlCallOne)
         //se adiciona a la tabla usando la funcion db y como parametros se da sql
         // file is available at req.file
