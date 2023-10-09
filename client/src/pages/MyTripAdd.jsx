@@ -4,11 +4,15 @@ import { useParams, useNavigate } from 'react-router-dom';
 import "./MyTrip.css";
 
 //tripData prop is to receive data to edit the trip
-function MyTripAdd() {
+function MyTripAdd(user) {
+    console.log("Prop User", user);
     const { trip_id } = useParams();
+    const [userId, setUserId] = useState(0);
+    console.log("constante UserId", userId);
+
     const navigate = useNavigate();
     const [myTrip, setMyTrip] = useState({
-        user_id: "1",
+        user_id: 0,
         name: "",
         latitude: "",
         longitude: "",
@@ -17,10 +21,15 @@ function MyTripAdd() {
         imageName: "",
         imageDescription: ""
     })
+
     const [imageFile, SetImageFile] = useState(null);
 
     // Use useEffect to populate the form with existing trip data if it's provided
     useEffect(() => {
+        setUserId(user.user.id)
+        console.log("User ID before update:", user.user.id);
+        setMyTrip((myTrip) => ({ ...myTrip, user_id: userId }));
+        console.log("User ID after update:", myTrip.user_id);
         if (trip_id) {
             // Realiza una solicitud al servidor para obtener los datos del viaje por trip_id
             fetch(`http://localhost:5000/api/trips/${trip_id}`)
@@ -34,7 +43,7 @@ function MyTripAdd() {
                 });
         } else {
             setMyTrip({
-                user_id: "1",
+                ...myTrip, // Copy all properties from myTrip
                 name: "",
                 latitude: "",
                 longitude: "",
@@ -42,9 +51,11 @@ function MyTripAdd() {
                 description: "",
                 imageName: "",
                 imageDescription: ""
-            })
-        }
+            });
+        };
+
     }, [trip_id]);
+
 
     const handleFileChange = (event) => {
         console.log('File input changed:', event.target.files[0]); // Check if files are defined
@@ -67,12 +78,10 @@ function MyTripAdd() {
         try {
             //check if trip data exists- to edit and not create a new trip
             if (trip_id) {
-                console.log("You are on edit mode")
-
                 // Editing an existing trip
                 const formData = new FormData();
                 formData.append('imageFile', imageFile, imageFile.name);
-                //subir mytrip
+
                 formData.append('user_id', myTrip.user_id);
                 formData.append('name', myTrip.name);
                 formData.append('latitude', myTrip.latitude);
@@ -96,7 +105,10 @@ function MyTripAdd() {
                     formData.append('imageFile', imageFile, imageFile.name);
                 }
                 //subir mytrip
-                formData.append('user_id', myTrip.user_id);
+                console.log("My Trip Object", myTrip);
+                //subir mytrip
+
+                formData.append('user_id', userId);
                 formData.append('name', myTrip.name);
                 formData.append('latitude', myTrip.latitude);
                 formData.append('longitude', myTrip.longitude);
@@ -122,7 +134,7 @@ function MyTripAdd() {
         };
         //limpia a setMytRIP
         setMyTrip({
-            user_id: "1",
+            ...myTrip, // Copy all properties from myTrip
             name: "",
             latitude: "",
             longitude: "",
@@ -146,7 +158,7 @@ function MyTripAdd() {
     const onCancelAdd = () => {
         // 1. Limpia el formulario
         setMyTrip({
-            user_id: "1",
+            ...myTrip, // Copy all properties from myTrip
             name: "",
             latitude: "",
             longitude: "",
