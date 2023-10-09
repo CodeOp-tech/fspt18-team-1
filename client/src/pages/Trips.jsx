@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import "./Trips.css";
 import { Link } from 'react-router-dom'
+import { useContext } from 'react';
+import { AuthenticationContext } from '../components/AuthContext';
 
 function Trips() {
 
     const [trips, setTrips] = useState([]);
     const [emptyTripList, setEmptyTripList] = useState("");
 
+    const { user } = useContext(AuthenticationContext);
     //actualiza la constante myTrips
     useEffect(() => {
         getTrips();
