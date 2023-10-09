@@ -9,7 +9,6 @@ function Trips() {
     const [trips, setTrips] = useState([]);
     const [emptyTripList, setEmptyTripList] = useState("");
 
-    const { user } = useContext(AuthenticationContext);
     //actualiza la constante myTrips
     useEffect(() => {
         getTrips();

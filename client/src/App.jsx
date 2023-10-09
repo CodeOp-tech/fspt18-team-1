@@ -9,7 +9,7 @@ import MyTrip from "./pages/MyTrip"
 import MyTripAdd from "./pages/MyTripAdd"
 import Trips from "./pages/Trips"
 import { AuthenticationProvider } from "./components/AuthProvider";
-import { AuthenticationContext } from './components/AuthContext';
+
 
 import {
   BrowserRouter,

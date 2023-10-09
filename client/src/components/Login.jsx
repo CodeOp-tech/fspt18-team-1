@@ -22,8 +22,6 @@ function Login() {
     navigate("/trips")
   };
 
-
-
   return (
     <div className="page-container">
     <div className="login-container">
