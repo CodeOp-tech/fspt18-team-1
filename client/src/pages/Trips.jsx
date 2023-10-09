@@ -1,24 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
 import "./Trips.css";
 import { Link } from 'react-router-dom'
-import { useContext } from 'react';
-import { AuthenticationContext } from '../components/AuthContext';
 
-function Trips(user) {
-
-    const [userId, setUserId] = useState(0);
-    console.log("id de usuario", userId)
+function Trips() {
     const [trips, setTrips] = useState([]);
     const [emptyTripList, setEmptyTripList] = useState("");
     const [userTrips, setUserTrips] = useState([]);
     const [emptyUserTripList, setEmptyUserTripList] = useState("");
 
     //actualiza la constante myTrips
+  
     useEffect(() => {
-        setUserId(user.user.id);
-    }, []);
-    useEffect(() => {
-        setUserId(user.user.id);
         getTrips();
         getUserTrips();
     }, []);
