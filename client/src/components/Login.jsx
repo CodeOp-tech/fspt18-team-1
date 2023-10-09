@@ -19,7 +19,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await loginContext(credentials);
-    navigate("/trips")
+    navigate("/trips");
   };
 
   return (

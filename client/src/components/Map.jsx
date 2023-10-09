@@ -1,23 +1,48 @@
-import React from 'react';
-import { TileLayer, Marker, Popup } from 'react-leaflet';
-import { MapContainer } from 'https://cdn.esm.sh/react-leaflet/MapContainer'
-function Map(mapTrip) {
-  const position = [mapTrip.mapTrip.latitude, mapTrip.mapTrip.longitude];
-  console.log('Contenido de mapTrip:', mapTrip, mapTrip.mapTrip.latitude);
-  return (
-    <div>
-      {/* <MapContainer center={position} zoom={13} style={{ height: '400px', width: '100%' }}>
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
-        <Marker position={position}>
-          <Popup>
-              Viaje
-          </Popup>
-        </Marker>
-      </MapContainer> */}
-    </div>
-  );
+import React from 'react'
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+
+const containerStyle = {
+  width: '400px',
+  height: '400px'
+};
+
+const center = {
+  lat: -3.745,
+  lng: -38.523
+};
+
+function Map() {
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: "AIzaSyBUl0IhufBUdrMyWIlffbOJQ0tCmZnWLP4"
+  })
+
+  const [map, setMap] = React.useState(null)
+
+  const onLoad = React.useCallback(function callback(map) {
+    // This is just an example of getting and using the map instance!!! don't just blindly copy!
+    const bounds = new window.google.maps.LatLngBounds(center);
+    map.fitBounds(bounds);
+
+    setMap(map)
+  }, [])
+
+  const onUnmount = React.useCallback(function callback(map) {
+    setMap(null)
+  }, [])
+
+  return isLoaded ? (
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={10}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+      >
+        { /* Child components, such as markers, info windows, etc. */ }
+        <></>
+      </GoogleMap>
+  ) : <></>
 }
+
 export default Map;
