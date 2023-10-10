@@ -80,10 +80,9 @@ router.get("/:trip_id", async (req, res) => {
         imageDescription: "",
     }
 
-    // Obtén el ID del viaje desde los parámetros de la URL
-    const tripId = req.params.trip_id;
-
     try {
+         // Obtén el ID del viaje desde los parámetros de la URL
+         const tripId = req.params.trip_id;
         // llama a la lista de trips atraves de la funcion db
         const resultsTripCall = `SELECT * FROM trips WHERE id =${tripId};`
         const resultsTrip = await db(resultsTripCall);
@@ -110,7 +109,8 @@ router.get("/:trip_id", async (req, res) => {
         // llama a la lista de images atraves de la funcion db
         const resultsImagesCall = `SELECT * FROM images WHERE trip_id =${tripId};`
         const resultsImages = await db(resultsImagesCall);
-        if (resultsImages.length) {
+        console.log("resultado llamada a images", resultsImages.data)
+        if (resultsImages.data) {
             console.log("resultados de llamada a images", resultsImages.data)
             trip.imageName = resultsImages.data[0].name;
             trip.imageDescription = resultsImages.data[0].description;
@@ -160,13 +160,13 @@ router.post("/", upload.single('imageFile'),userShouldBeLoggedIn,async (req, res
             // await fs.rename(tmp_path, target_path); --Andres using axios
             // rename the file
             await renameAsync(tmp_path, target_path);//chatgpt option
-
             
             const lasTrip_IdCall = await db(`SELECT MAX(id) FROM trips`)
             console.log("ULTIMA TRIP CAll", lasTrip_IdCall);
             const lasTrip_Id = lasTrip_IdCall.data[0]['MAX(id)'];
             console.log("ULTIMA TRIPPP Id", lasTrip_Id);
             // Insertar datos en la tabla "images" del imagan del trip
+            console.log("nombre del file",fileN)
             const sqlCallTwo = `INSERT INTO images (name, trip_id, description) VALUES ('${filename}',${lasTrip_Id},'${body.imageDescription}');`
             await db(sqlCallTwo);
         }

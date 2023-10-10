@@ -58,7 +58,7 @@ function Signup() {
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">Username</label>
           <input 
             type="text"
             id="username"
@@ -68,9 +68,9 @@ function Signup() {
             required
           />
         </div>
-        <p></p>
+       
         <div>
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
@@ -80,9 +80,9 @@ function Signup() {
             required
           />
         </div>
-        <p></p>
+        
         <div>
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
@@ -92,9 +92,9 @@ function Signup() {
             required
           />
         </div>
-        <p></p>
+       
         <div>
-          <label htmlFor="nationality">Nationality:</label>
+          <label htmlFor="nationality">Nationality</label>
           <input
             type="text"
             id="nationality"
@@ -104,9 +104,9 @@ function Signup() {
             required
           />
         </div>
-        <p></p>
+      
         <div>
-          <label htmlFor="birthdate">Birthdate:</label>
+          <label htmlFor="birthdate">Birthdate</label>
           <input
             type="date"
             id="birthdate"
@@ -116,9 +116,9 @@ function Signup() {
             required
           />
         </div>
-        <p></p>
+        
         <div>
-          <label htmlFor="foto">Foto:</label>
+          <label htmlFor="foto">Foto</label>
           <input
             type="file"
             id="foto"
