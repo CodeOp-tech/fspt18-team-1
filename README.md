@@ -90,3 +90,5 @@ Run `npm run migrate` in your TERMINAL, in the project folder (not your MySQL CL
 Run `npm start` in project directory to start the Express server on port 5000
 
 `cd client` and run `npm run dev` to start client server in development mode with hot reloading in port 5173.
+
+### Future features
