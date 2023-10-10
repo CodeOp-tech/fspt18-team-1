@@ -92,3 +92,15 @@ Run `npm start` in project directory to start the Express server on port 5000
 `cd client` and run `npm run dev` to start client server in development mode with hot reloading in port 5173.
 
 ### Future features
+
+- Searchbar for travel plans, users, places
+- A tool to measure expences during the trip
+- A feed with: 
+    - Page with your old trips
+    - Page with your nextrips
+    - Best Friends
+    - Live Trips
+- Trip plan organized by day/s
+- To be able to decide to make your trip pubblic or private
+
+
