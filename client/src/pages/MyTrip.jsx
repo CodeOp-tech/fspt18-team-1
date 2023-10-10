@@ -10,6 +10,8 @@ function MyTrip() {
     const [trip, setTrip] = useState([]);
     const [isEditFormOpen, setIsEditFormOpen] = useState(false);
 
+
+    
     //actualiza la constante myTrips and Images
     useEffect(() => {
         getTrip();

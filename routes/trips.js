@@ -43,8 +43,11 @@ router.get("/images/:trip_id", (req, res) => {
 /********* TRIPS **********/
 /* GET ALL - todos los trips de la BBDD*/
 router.get("/", (req, res) => {
-    // llama a la lista completa de trips atraves de la funcion db
-    db("SELECT * FROM trips ORDER BY id ASC;")
+    // llama a la lista completa de trips atraves de la funcion db y las imagenes de la tabla images
+    db(`SELECT trips.*, images.name AS imageName, images.description AS imageDescription 
+    FROM trips 
+    LEFT JOIN images ON trips.id = images.trip_id;`
+    )
         .then(results => {
             console.log(results.data)
             res.send(results.data);
@@ -57,7 +60,12 @@ router.get("/userTrips", userShouldBeLoggedIn ,(req, res) => {
     // Obtén el ID del usuario desde , userShouldBeLoggedIn ,
     const userId = req.user_id;
     // llama a la lista completa de trips atraves de la funcion db
-    db(`SELECT * FROM trips WHERE user_id =${userId}`)
+    db(
+    `SELECT trips.*, images.name AS imageName, images.description AS imageDescription 
+    FROM trips LEFT JOIN images ON trips.id = images.trip_id
+    WHERE trips.user_id = ${userId};`
+    )
+
         .then(results => {
             console.log(results.data)
             res.send(results.data);
@@ -87,8 +95,6 @@ router.get("/:trip_id", async (req, res) => {
         const resultsTripCall = `SELECT * FROM trips WHERE id =${tripId};`
         const resultsTrip = await db(resultsTripCall);
         if (resultsTrip) {
-            console.log("resultados de llamada a trip", resultsTrip.data)
-
             //transform date String to html readable date
             // Original date string
             const originalDateString = resultsTrip.data[0].date;
@@ -143,30 +149,23 @@ router.post("/", upload.single('imageFile'),userShouldBeLoggedIn,async (req, res
         if (imagefile) {
             // check the extension of the file
             const extension = mime.extension(imagefile.mimetype);
-
             // create a new random name for the file
             const filename = uuidv4() + "." + extension;
-
             // grab the filepath for the temporary file
             const tmp_path = imagefile.path;
-            console.log("path temporal del file", tmp_path)
-
-            // construct the new path for the final file
+                      // construct the new path for the final file
             const target_path = path.join(__dirname, "../public/images/") + filename;
-            console.log("path definitivo del file", target_path)
-
-
+          
             // rename the file
             // await fs.rename(tmp_path, target_path); --Andres using axios
             // rename the file
             await renameAsync(tmp_path, target_path);//chatgpt option
-            
+            //llamada para conseguir el id de la ultima viaje creada
             const lasTrip_IdCall = await db(`SELECT MAX(id) FROM trips`)
-            console.log("ULTIMA TRIP CAll", lasTrip_IdCall);
+           // id de la ultima viaje creada
             const lasTrip_Id = lasTrip_IdCall.data[0]['MAX(id)'];
-            console.log("ULTIMA TRIPPP Id", lasTrip_Id);
+         
             // Insertar datos en la tabla "images" del imagan del trip
-            console.log("nombre del file",fileN)
             const sqlCallTwo = `INSERT INTO images (name, trip_id, description) VALUES ('${filename}',${lasTrip_Id},'${body.imageDescription}');`
             await db(sqlCallTwo);
         }
