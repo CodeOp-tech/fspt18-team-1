@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import "./Signup.css";
+import { useNavigate } from 'react-router-dom';
+import { AuthenticationContext } from './AuthContext';
+import "./Signup.css"
 
 function Signup() {
+  const navigate = useNavigate();
+  const { isAuthenticated } = useContext(AuthenticationContext);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/login');
+    }
+  }, [isAuthenticated, navigate])
+
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -24,24 +35,27 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Send a POST request to backend to register the user using Axios
+    // Send a POST request to the backend to register the user using Axios
     try {
-        const response = await axios.post('/api/users/register', formData);
-        console.log(response.data);
-        if (response.status === 200) {
-          console.log('Registration successful');
-        } else {
-          console.error('Registration failed');
-        }
-        
-      } catch (error) {
-        console.error('Error:', error);
+      const response = await axios.post('/api/users/register', formData);
+      console.log(response.data);
+      if (response.status === 200) {
+        console.log('Registration successful');
+        navigate("/login")
+      } else {
+        console.error('Registration failed');
       }
-    };
+    } catch (error) {
+      console.error('Error:', error);
+      setError("Signup failed. Username or email already used.");
+    }
+  };
 
   return (
+    <div className="page-container">
     <div className="signup-container">
-      <h1 className="pt-14 pb-20">Signup</h1>
+      <h2>Signup</h2>
+      {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username:</label>
@@ -114,9 +128,10 @@ function Signup() {
           />
         </div>
         <div>
-          <Link to="/login">Register</Link>
+          <button type="submit">Register</button>
         </div>
       </form>
+    </div>
     </div>
   );
 }

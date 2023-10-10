@@ -1,74 +1,64 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthenticationContext } from "./AuthContext";
 import "./Login.css";
 
-const HOSTNAME = "/api";
-
-function Login(props) {
+function Login() {
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
-
-  const { username, password } = credentials;
+  const { loginContext } = useContext(AuthenticationContext);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
+    await loginContext(credentials);
+    navigate("/trips");
   };
 
-  // const navigate = useNavigate();
-  //const navigate = useNavigate();
-
-  const login = async () => {
-    try {
-      const { data } = await axios(`${HOSTNAME}/users/login`, {
-        method: "POST",
-        data: credentials,
-      });
-      localStorage.setItem("token", data.token);
-      props.getUser();
-      console.log(data.message, data.token);
-      navigate('/trips');
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  console.log(props);
   return (
+    <div className="page-container">
     <div className="login-container">
-      <h1 className="pt-14 pb-20">Login</h1>
-      <form onSubmit={(e) => handleSubmit(e)}></form>
-        <label htmlFor="name">User name</label>
-        <input 
-        
-          value={username}
-          onChange={handleChange}
-          name="username"
-          type="text"
-        />
-        <p></p>
-        <label htmlFor="email">Password</label>
-        <input 
-          value={password}
-          onChange={handleChange}
-          name="password"
-          type="password"
-        />
-        <p></p>
-        <button onClick={login} type="submit" className="login-fieldset-submit">
-          Log in
-        </button>
-        <div></div>
-        <Link to="/signup"> 
-        Don't have an account?
+      <div className='flex flex-col items-center'>
+        <h1 className="pt-14 pb-20"> Login </h1>
+        <form className="flex flex-col items-start" onSubmit={handleSubmit}>
+            <div>
+              <label className="w-36 inline-flex" htmlFor="username">User name</label>
+              <input
+                className="w-80"
+                value={credentials.username}
+                onChange={handleChange}
+                name="username"
+                type="text"
+              />
+            </div>
+            <div>
+              <label className="w-36 inline-flex" htmlFor="password">Password</label>
+              <input
+                className="w-80"
+                value={credentials.password}
+                onChange={handleChange}
+                name="password"
+                type="password"
+              />
+            </div>
+          <Link to={"/signup"}>
+          Don t have an account? Sign up
         </Link>
-        </div>
+          <button type="submit" className="login-fieldset-submit">
+        Login
+      </button>
+        </form>
+        
+      </div>
+      </div>
+    </div>
   );
 }
 
