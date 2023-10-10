@@ -8,8 +8,8 @@ function NavBar () {
     return (
     <nav>
     <ul>
-    <input className="search"/>
-    <FaSistrix className="icon-search"/>
+      <input className="search"/>
+        <FaSistrix className="icon-search"/>
       <li className="links">
         <Link to="/login">Login</Link>
       </li>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {useParams,useNavigate} from "react-router-dom"
 import "./MyTrip.css";
 
+
 function MyTrip() {
     const {trip_id} = useParams();
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ function MyTrip() {
         getTrip();
         getImage();
     }, []);
+
 
     //llama a la base de datos y trae todos los viajes
     const getTrip = () => {
@@ -60,6 +62,7 @@ function MyTrip() {
         navigate(`/mytripadd/${trip_id}`);
     };
 
+
     return (
         <div className="flex flex-col items-center">
                 <div key={trip.id}>
@@ -67,13 +70,14 @@ function MyTrip() {
                 <div className="">
                 {image && <img src = {`http://localhost:5000/images/${image.name}`} id={image.id} alt={image.description}/>}
                 </div>
-                    <p className="flex mb-8"></p>
-                    <p>{trip.description}</p>
-                    <p>{trip.date}</p>
+                    <p className="trip-description">{trip.description}</p>
+                    <p className="trip-date"> {trip.date}</p>
             <div className="p-4"></div>
                     <button className="" onClick={() => handleDelete(trip.id)}>Delete</button>
-                    <button className="" onClick={handleEdit}>Edit</button>
+                    <button className="" onClick={handleEdit}>Edit</button> 
                     <div className="p-4">
+                    <div className="main-content" style={{ marginBottom: '100px' }}></div>
+
                     </div>
                 </div>
         </div>

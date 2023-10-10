@@ -10,13 +10,9 @@
             align-items: center; /* Centrar verticalmente los elementos en la barra de navegación */
         }
         
-        input.search { 
+        .search { 
             margin-right: 20px;
-            
-    ;
-        
         }
-
     
         ul {
             list-style-type: none; /* Elimina los puntos de la lista */

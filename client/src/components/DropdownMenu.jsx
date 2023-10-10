@@ -14,15 +14,12 @@ function DropdownMenu() {
     };
   
     return (
-      <div className="dropdown">
+      <div className={`dropdown ${isOpen ? 'active' : ''}`}>
         <button onClick={toggleMenu}>
             <FaBars />
         </button>
         {isOpen && (
           <ul className="menu">
-            <li>
-                <Link to="/login">Login</Link>
-            </li>
             <div className="continentes">
             <li>Europa</li> 
             <li>Asia</li>

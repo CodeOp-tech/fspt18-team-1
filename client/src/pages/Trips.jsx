@@ -26,17 +26,20 @@ function Trips() {
     return (
         <div className="trips">
             <h1 className="pt-14 pb-20">Trips</h1>
-            <div className="grid grid-cols-4 gap-6">
+            <table className="table">
                     {Trips.map((trip) => ( 
-                        <Link key={trip.id} to={`/trips/${trip.id}`}>
+                       
+                        <Link className="link" key={trip.id} to={`/trips/${trip.id}`}>
                             <trip >{trip.name}</trip>
-                         </Link>
+                        </Link>
+                    
                     ))}
-             </div>
+            </table>
         </div>
-    )
-}
-// CREAR COMPONENTE APARTE MAPA // LLAMADA A LA API 
-// CREAR NUEVO ESPACIO COMO EVENTOS (MIS ESPACIOS)
+        
+
+    );
+};
+
 
 export default Trips

@@ -5,7 +5,7 @@ footer {
     left: 0;
     right: 0;
     width: 100%;
-    background-color: var(--color-secondary); 
+    background-color: #111a17; 
     color: white;
     padding: 10px;
     min-height: auto;
@@ -27,7 +27,7 @@ footer {
     margin-top: 10px;
     margin-bottom: 10px; 
     display: inline-block;  
-    color: black; 
+    color: white; 
     
   }
 

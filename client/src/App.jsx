@@ -11,6 +11,7 @@ import MyTrip from "./pages/MyTrip"
 import MyTripAdd from "./pages/MyTripAdd"
 import Trips from "./pages/Trips"
 import PrivateRoute from './components/PrivateRoute'
+/* import SearchBar from './components/SearchBar' */ 
 
 import {
   BrowserRouter,
@@ -55,7 +56,6 @@ console.log(user);
       <Route path="/login" element={<Login getUser={getUser}/>} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/logout" element={<Logout />} />
-      <Route path="/trips/:trip_id" element={<MyTrip />} />
       <Route path="/mytripadd" element={<MyTripAdd />} />
       <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
       <Route 
@@ -63,8 +63,6 @@ console.log(user);
       element={
         <PrivateRoute>
           <Route path="/mytrip" element={<MyTrip />} />
-          <Route path="/mytripadd" element={<MyTripAdd />} />
-          <Route path="/mytripadd/:trip_id" element={<MyTripAdd />} />
         </PrivateRoute>
       }
       />

@@ -62,6 +62,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   background-color: var(--color-tertiary); /* Fondos de botones con el color terciario */
+  margin-right: 20px;
 }
 
 button:hover {
@@ -88,4 +89,5 @@ input {
 
 label {
   margin-right: 10px; /* Ajusta el margen derecho según tus necesidades */
+  font-size: 15px;
 }
