@@ -67,12 +67,11 @@ router.post("/login", async (req, res) => {
 router.get("/profile", userShouldBeLoggedIn, async (req, res) => {
   const id = req.user_id;
   console.log(id),
-    db(`SELECT * FROM users WHERE id = "${id}"`)
+    db(`SELECT id, username, email, nationality, birthdate  FROM users WHERE id = "${id}"`)
     .then(results => {
       res.send(results.data[0]);
   })
   .catch(error => res.status(500).send(error));
   });
-
 
 module.exports = router;

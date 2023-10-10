@@ -65,7 +65,6 @@ router.get("/userTrips", userShouldBeLoggedIn ,(req, res) => {
     FROM trips LEFT JOIN images ON trips.id = images.trip_id
     WHERE trips.user_id = ${userId};`
     )
-
         .then(results => {
             console.log(results.data)
             res.send(results.data);
