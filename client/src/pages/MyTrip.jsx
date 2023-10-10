@@ -57,7 +57,6 @@ function MyTrip() {
     return (
             <div key={trip.id}>
                 <h1 className="pt-14 pb-20">{trip.name}</h1>
-                <h1 className="pt-14 pb-20">{trip.imageName}</h1>
                 {/*<Map mapTrip={trip}/>*/}
                 <div className="">
                     {trip && <img src={`http://localhost:5000/images/${trip.imageName}`} id={trip.imageName} alt={trip.imageDescription} />}

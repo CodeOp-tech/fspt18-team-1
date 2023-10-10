@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import "./Trips.css";
 import { Link } from 'react-router-dom'
+import { FaCircle } from 'react-icons/fa';
 
 function Trips() {
     const [trips, setTrips] = useState([]);
@@ -62,25 +63,31 @@ function Trips() {
 
     return (
         <div className="trips">
-            <h1 className="pt-14 pb-20">Trips</h1>
-            <div className="p-4"></div>
-            
+            <h1 className="pt-14 pb-20">My Trips</h1>
+    
                 {emptyUserTripList && <p>{emptyUserTripList}</p>}
-                <table className="table">
+                
                 {userTrips.map((userTrip) => (
                     <Link key={userTrip.id} to={`/trips/${userTrip.id}`}>
-                        <li >{userTrip.name}</li>
+                        <div className="iconsimg">
+                            <FaCircle /> {/* Usar el ícono de Facebook */}
+                        </div>
+                        <li className='trip'>{userTrip.name}</li>
                     </Link>
                 ))}
-                </table>
+                
+            <h1 className="pt-14 pb-20">Trips</h1>
+
                 {emptyTripList && <p>{emptyTripList}</p>}
-                <table className="table">
                 {trips.map((trip) => (
                     <Link key={trip.id} to={`/trips/${trip.id}`}>
-                        <li >{trip.name}</li>
+                        <div className="iconsimg">
+                            <FaCircle /> {/* Usar el ícono de Facebook */}
+                        </div>
+                        <li className='trip'>{trip.name}</li>
+                        {/*<img src={`http://localhost:5000/images/${trip.imageName}`} id={trip.imageName} alt={trip.imageDescription} />*/}
                     </Link>
                 ))}
-               </table>
         </div>
         
 
