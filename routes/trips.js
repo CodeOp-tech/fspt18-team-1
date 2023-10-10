@@ -166,7 +166,6 @@ router.post("/", upload.single('imageFile'),userShouldBeLoggedIn,async (req, res
             const lasTrip_Id = lasTrip_IdCall.data[0]['MAX(id)'];
             console.log("ULTIMA TRIPPP Id", lasTrip_Id);
             // Insertar datos en la tabla "images" del imagan del trip
-            console.log("nombre del file",fileN)
             const sqlCallTwo = `INSERT INTO images (name, trip_id, description) VALUES ('${filename}',${lasTrip_Id},'${body.imageDescription}');`
             await db(sqlCallTwo);
         }
