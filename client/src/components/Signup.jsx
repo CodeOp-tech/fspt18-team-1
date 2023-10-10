@@ -59,7 +59,7 @@ function Signup() {
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="username">Username:</label>
-          <input
+          <input 
             type="text"
             id="username"
             name="username"
@@ -68,6 +68,7 @@ function Signup() {
             required
           />
         </div>
+        <p></p>
         <div>
           <label htmlFor="password">Password:</label>
           <input
@@ -79,6 +80,7 @@ function Signup() {
             required
           />
         </div>
+        <p></p>
         <div>
           <label htmlFor="email">Email:</label>
           <input
@@ -90,6 +92,7 @@ function Signup() {
             required
           />
         </div>
+        <p></p>
         <div>
           <label htmlFor="nationality">Nationality:</label>
           <input
@@ -101,6 +104,7 @@ function Signup() {
             required
           />
         </div>
+        <p></p>
         <div>
           <label htmlFor="birthdate">Birthdate:</label>
           <input
@@ -112,6 +116,7 @@ function Signup() {
             required
           />
         </div>
+        <p></p>
         <div>
           <label htmlFor="foto">Foto:</label>
           <input

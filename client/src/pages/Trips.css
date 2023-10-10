@@ -1,0 +1,38 @@
+.trip { 
+    font-weight: bold;
+    border-width: 2px;
+    border-style: dotted;
+    border-color: #03363d;
+    padding:20px;
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
+
+.table { 
+    margin-left: 90px;
+    margin-right: 50px;
+    padding: auto;
+    display: contents;
+
+}
+
+.link { 
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #718878;
+    margin: 10px;
+    max-width: 250px;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+
+}
+
+.link:hover {
+  border-style: solid;
+  border-color: var(--color-secondary);
+  background-color: #244235;
+ 
+}

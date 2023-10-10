@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import './App.css'
 import NavBar from './components/NavBar';
+import DropdownMenu from './components/DropdownMenu';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Logout from './components/Logout';
@@ -30,6 +31,7 @@ function App() {
       
       <Routes>
       <Route path="/" element={<Trips />} />
+      <Route path="/dropdownmenu" element= {<DropdownMenu />} />
       <Route path="/trips" element={<Trips />} />
       <Route path="/login" element={<Login />} />
       </Routes>

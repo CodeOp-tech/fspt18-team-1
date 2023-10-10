@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from "react-router-dom"
 import "./MyTrip.css";
-import Map from "../components/Map";
+// import Map from "../components/Map";
 
 
 function MyTrip() {
@@ -14,6 +14,7 @@ function MyTrip() {
     useEffect(() => {
         getTrip();
     }, []);
+
 
     //llama a la base de datos y trae todos los viajes
     const getTrip = () => {
@@ -52,25 +53,25 @@ function MyTrip() {
         navigate(`/mytripadd/${trip_id}`);
     };
 
+
     return (
-        <div className="flex flex-col items-center">
             <div key={trip.id}>
                 <h1 className="pt-14 pb-20">{trip.name}</h1>
-                <h1 className="pt-14 pb-20">{trip.user_id}</h1>
-                <Map mapTrip={trip}/>
+                <h1 className="pt-14 pb-20">{trip.imageName}</h1>
+                {/*<Map mapTrip={trip}/>*/}
                 <div className="">
-                    {trip.imageName && <img src={`http://localhost:5000/images/${trip.imageName}`} id={trip.imageName} alt={trip.imageDescription} />}
+                    {trip && <img src={`http://localhost:5000/images/${trip.imageName}`} id={trip.imageName} alt={trip.imageDescription} />}
                 </div>
-                <p className="flex mb-8"></p>
-                <p>{trip.description}</p>
-                <p>{trip.date}</p>
-                <div className="p-4"></div>
-                <button className="" onClick={() => handleDelete(trip.id)}>Delete</button>
-                <button className="" onClick={handleEdit}>Edit</button>
-                <div className="p-4">
+                    <p className="trip-description">{trip.description}</p>
+                    <p className="trip-date"> {trip.date}</p>
+            <div className="p-4"></div>
+                    <button className="" onClick={() => handleDelete(trip.id)}>Delete</button>
+                    <button className="" onClick={handleEdit}>Edit</button> 
+                    <div className="p-4">
+                    <div className="main-content" style={{ marginBottom: '100px' }}></div>
+
+                    </div>
                 </div>
-            </div>
-        </div>
     )
 };
 

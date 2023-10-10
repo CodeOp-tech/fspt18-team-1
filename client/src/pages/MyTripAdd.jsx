@@ -42,7 +42,7 @@ function MyTripAdd() {
                 });
         } else {
             setMyTrip({
-                ...myTrip, // Copy all properties from myTrip
+    
                 name: "",
                 latitude: "",
                 longitude: "",
@@ -134,7 +134,7 @@ function MyTripAdd() {
         };
         //limpia a setMytRIP
         setMyTrip({
-            ...myTrip, // Copy all properties from myTrip
+    
             name: "",
             latitude: "",
             longitude: "",
@@ -158,7 +158,7 @@ function MyTripAdd() {
     const onCancelAdd = () => {
         // 1. Limpia el formulario
         setMyTrip({
-            ...myTrip, // Copy all properties from myTrip
+
             name: "",
             latitude: "",
             longitude: "",
@@ -175,29 +175,25 @@ function MyTripAdd() {
 
     return (
         <div className="login-container">
-            <div className="flex flex-col items-center">
-                <h1 className="pt-14 pb-20">Add Trip</h1>
-                <form className="flex flex-col items-start" onSubmit={handleSubmit}>
-                    <div className="form__elementcontainer">
-                        <div className="form__element mb-4" >
-                            <label className="w-36 inline-flex" htmlFor="name">MyTrip Name:</label>
-                            <input className="form__element__input"
-                                id="name"
-                                name="name"
-                                type="text"
-                                value={myTrip.name}
-                                onChange={handleChange}
-                                placeholder="New Mytrip Name"
+            <h1 className="pt-14 pb-20">Add Trip</h1>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="name">MyTrip Name:</label>
+                        <input
+                            id="name"
+                            name="name"
+                            type="text"
+                            value={myTrip.name}
+                            onChange={handleChange}
+                            placeholder="New Mytrip Name"
                             />
-                        </div>
-                        <p></p>
                         <div>
                             <label className="uploadForm__label" htmlFor="file">Click to choose a file and upload </label>
                             <input className="uploadFom__input" type='file' name='file' id="file" onChange={handleFileChange}></input>
                         </div>
+                        <p></p>
                         <div className="form__element mb-4" >
                             <label className="w-36 inline-flex" htmlFor="imageDescription">Image Description:</label>
-                            <input className="form__element__input"
+                            <input 
                                 id="imageDescription"
                                 name="imageDescription"
                                 type="text"
@@ -206,7 +202,6 @@ function MyTripAdd() {
                                 placeholder="Insert an image description"
                             />
                         </div>
-                        <p></p>
                         <div className="form__element mb-4" >
                             <p>Where:</p>
                             {/* html for vincula en labels con el id del input */}
@@ -232,7 +227,7 @@ function MyTripAdd() {
                         </div>
                         <div className="form__element mb-4" >
                             <label htmlFor="date">When:</label>
-                            <input className="form__element__input"
+                            <input 
                                 id="date"
                                 name="date"
                                 type="date"
@@ -246,7 +241,7 @@ function MyTripAdd() {
                         <p></p>
                         <div className="form__element mb-4" >
                             <label htmlFor="name">MyTrip Notes:</label>
-                            <textarea className="form__element__input"
+                            <textarea 
                                 id="description"
                                 name="description"
                                 type="text"
@@ -261,9 +256,7 @@ function MyTripAdd() {
                             <button className="button button__add" type="submit"> {trip_id ? 'Save' : '+'} </button>
                             <button className="button button__cancel" onClick={handleCancel}>Cancel</button>
                         </div>
-                    </div>
                 </form>
-            </div>
         </div>
     )
 };

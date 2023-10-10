@@ -1,0 +1,64 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown.active .menu {
+    display: block; 
+
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  }
+  
+  .menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 85px;
+    background-color: #eaeee5;
+    border: 1px solid gray;
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .menu li {
+    padding: 10px;
+    border-bottom: 1px solid white;
+    position: left;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  
+  .dropdown button {
+    background-color: #b5bdc9;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
+  .dropdown button:hover {
+    background-color: #244235;
+  }
+
+  .continentes {
+           
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan si no caben en una línea */
+    justify-content: center; /* Alinea los elementos al centro horizontal */
+    position: inherit;
+    background-color: #244235;
+    border: solid;
+    border-radius: 4px;
+
+
+}
+
+
+
+.continentes li {
+    list-style: none; /* Quitar los marcadores de lista */
+    display: inline-block; /* Mostrar elementos en línea */
+    margin-left: 10px; /* Espacio entre elementos (puedes ajustarlo según tus necesidades) */
+    color: white;
+}

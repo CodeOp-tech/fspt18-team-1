@@ -61,25 +61,31 @@ function Trips() {
     };
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="trips">
             <h1 className="pt-14 pb-20">Trips</h1>
             <div className="p-4"></div>
-            <div className="grid grid-cols-4 gap-6">
-                {emptyTripList && <p>{emptyTripList}</p>}
-                {trips.map((trip) => (
-                    <Link key={trip.id} to={`/trips/${trip.id}`}>
-                        <li >{trip.name}</li>
-                    </Link>
-                ))}
+            
                 {emptyUserTripList && <p>{emptyUserTripList}</p>}
+                <table className="table">
                 {userTrips.map((userTrip) => (
                     <Link key={userTrip.id} to={`/trips/${userTrip.id}`}>
                         <li >{userTrip.name}</li>
                     </Link>
                 ))}
-            </div>
+                </table>
+                {emptyTripList && <p>{emptyTripList}</p>}
+                <table className="table">
+                {trips.map((trip) => (
+                    <Link key={trip.id} to={`/trips/${trip.id}`}>
+                        <li >{trip.name}</li>
+                    </Link>
+                ))}
+               </table>
         </div>
-    )
-}
+        
+
+    );
+};
+
 
 export default Trips
