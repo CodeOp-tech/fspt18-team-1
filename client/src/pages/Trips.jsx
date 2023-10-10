@@ -70,7 +70,8 @@ function Trips() {
                 {userTrips.map((userTrip) => (
                     <Link key={userTrip.id} to={`/trips/${userTrip.id}`}>
                         <div className="iconsimg">
-                            <FaCircle /> {/* Usar el ícono de Facebook */}
+                           {/* <FaCircle />  Usar el ícono de Facebook */}
+                        <img src={`http://localhost:5000/images/${userTrip.imageName}`} id={userTrip.imageName} alt={userTrip.imageDescription} />
                         </div>
                         <li className='trip'>{userTrip.name}</li>
                     </Link>
@@ -82,10 +83,10 @@ function Trips() {
                 {trips.map((trip) => (
                     <Link key={trip.id} to={`/trips/${trip.id}`}>
                         <div className="iconsimg">
-                            <FaCircle /> {/* Usar el ícono de Facebook */}
+                           {/* <FaCircle />  Usar el ícono de Facebook */}
+                        <img src={`http://localhost:5000/images/${trip.imageName}`} id={trip.imageName} alt={trip.imageDescription} />
                         </div>
                         <li className='trip'>{trip.name}</li>
-                        {/*<img src={`http://localhost:5000/images/${trip.imageName}`} id={trip.imageName} alt={trip.imageDescription} />*/}
                     </Link>
                 ))}
         </div>
