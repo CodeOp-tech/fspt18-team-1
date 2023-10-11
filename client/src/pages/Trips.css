@@ -6,23 +6,6 @@
     transition: border-color 0.25s;
 }
 
-.tableuser {
-    margin-left: 100px;
-    margin-right: 50px;
-    padding: auto;
-    display: contents;
-    gap: 20px; 
-
-}
-
-.table { 
-    margin-left: 90px;
-    margin-right: 50px;
-    padding: auto;
-    display: contents;
-
-}
-
 .link { 
     position: relative;
     display: inline-block;
@@ -49,6 +32,7 @@
     position: relative;
     font-size: 100px;
     display: inline-block;
+    top: 50px;
     flex-direction: column;
     align-items: center;
 

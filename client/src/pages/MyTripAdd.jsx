@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthenticationContext } from "../components/AuthContext"
-import "./MyTrip.css";
+import "./MyTripadd.css";
 
 //tripData prop is to receive data to edit the trip
 function MyTripAdd() {
@@ -174,10 +174,12 @@ function MyTripAdd() {
     };
 
     return (
-        <div className="login-container">
-            <h1 className="pt-14 pb-20">Add Trip</h1>
+        <div className="page-container">
+        <div className="mytripadd-container">
+            <h3>Add Trip</h3>
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="name">MyTrip Name:</label>
+                    <div>
+                    <label htmlFor="name">MyTrip Name</label>
                         <input
                             id="name"
                             name="name"
@@ -185,79 +187,81 @@ function MyTripAdd() {
                             value={myTrip.name}
                             onChange={handleChange}
                             placeholder="New Mytrip Name"
-                            />
-                        <div>
-                            <label className="uploadForm__label" htmlFor="file">Click to choose a file and upload </label>
-                            <input className="uploadFom__input" type='file' name='file' id="file" onChange={handleFileChange}></input>
-                        </div>
-                        <p></p>
-                        <div className="form__element mb-4" >
-                            <label className="w-36 inline-flex" htmlFor="imageDescription">Image Description:</label>
-                            <input 
+                        />
+                    </div>
+                    
+                    <div>
+                        <label  htmlFor="file">Click to choose a file and upload </label>
+                        <input  type='file' name='file' id="file" onChange={handleFileChange}></input>
+                    </div>
+                        
+                    <div>
+                        <label htmlFor="imageDescription">Image Description</label>
+                        <input 
                                 id="imageDescription"
                                 name="imageDescription"
                                 type="text"
                                 value={myTrip.imageDescription}
                                 onChange={handleChange}
                                 placeholder="Insert an image description"
-                            />
-                        </div>
-                        <div className="form__element mb-4" >
-                            <p>Where:</p>
-                            {/* html for vincula en labels con el id del input */}
-                            <label htmlFor="latitude">Lat:</label>
-                            <input className="form__element__input"
+                        />
+                    </div>
+                        
+                    <div>
+                        <label htmlFor="latitude">Lat</label>
+                        <input 
                                 id="latitude"
                                 name="latitude"
                                 type="text"
                                 value={myTrip.latitude}
                                 onChange={handleChange}
                                 placeholder="Add latitude eg.23.4"
-                            />
-                            <label htmlFor="longitude">Long:</label>
-                            <input className="form__element__input"
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="longitude">Long</label>
+                        <input
                                 id="longitude"
                                 name="longitude"
                                 type="text"
                                 value={myTrip.longitude}
                                 onChange={handleChange}
                                 placeholder="Add longitude eg.23.3"
-                            />
-                            <p></p>
-                        </div>
-                        <div className="form__element mb-4" >
-                            <label htmlFor="date">When:</label>
-                            <input 
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="date">When</label>
+                        <input 
                                 id="date"
                                 name="date"
                                 type="date"
                                 value={myTrip.date}
                                 onChange={handleChange}
                                 placeholder="Add date"
-                            />
-                            <p></p>
-                        </div>
+                        />     
+                    </div>
 
-                        <p></p>
-                        <div className="form__element mb-4" >
-                            <label htmlFor="name">MyTrip Notes:</label>
-                            <textarea 
+                    <div>
+                        <label htmlFor="name">MyTrip Notes</label>
+                        <textarea 
                                 id="description"
                                 name="description"
                                 type="text"
                                 value={myTrip.description}
                                 onChange={handleChange}
                                 placeholder="Write your notes here"
-                            />
-                            <p></p>
-                        </div>
-                        <div className="form__element mb-4" >
-                            <p></p>
-                            <button className="button button__add" type="submit"> {trip_id ? 'Save' : '+'} </button>
-                            <button className="button button__cancel" onClick={handleCancel}>Cancel</button>
-                        </div>
+                        />  
+                    </div>
+
+                    <div>
+                        <button type="submit"> {trip_id ? 'Save' : '+'} </button>
+                        <button onClick={handleCancel}>Cancel</button>
+                    </div>
                 </form>
         </div>
+    </div>
     )
 };
 

@@ -63,20 +63,21 @@ function Trips() {
 
     return (
         <div className="trips">
-            <h1 className="pt-14 pb-20">My Trips</h1>
+            <h1>My Trips</h1>
     
                 {emptyUserTripList && <p>{emptyUserTripList}</p>}
-                
+                <div className='tripcard'>
                 {userTrips.map((userTrip) => (
                     <Link key={userTrip.id} to={`/trips/${userTrip.id}`}>
                         <div className="iconsimg">
                             <FaCircle /> {/* Usar el ícono de Facebook */}
                         </div>
                         <li className='trip'>{userTrip.name}</li>
-                    </Link>
+                    </Link>  
                 ))}
+                </div>
                 
-            <h1 className="pt-14 pb-20">Trips</h1>
+            <h1>Trips</h1>
 
                 {emptyTripList && <p>{emptyTripList}</p>}
                 {trips.map((trip) => (

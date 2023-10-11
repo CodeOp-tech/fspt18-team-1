@@ -25,13 +25,11 @@ function Login() {
   return (
     <div className="page-container">
     <div className="login-container">
-      <div className='flex flex-col items-center'>
-        <h1 className="pt-14 pb-20"> Login </h1>
-        <form className="flex flex-col items-start" onSubmit={handleSubmit}>
+        <h1> Login </h1>
+        <form onSubmit={handleSubmit}>
             <div>
-              <label className="w-36 inline-flex" htmlFor="username">User name</label>
+              <label htmlFor="username">User name</label>
               <input
-                className="w-80"
                 value={credentials.username}
                 onChange={handleChange}
                 name="username"
@@ -39,9 +37,8 @@ function Login() {
               />
             </div>
             <div>
-              <label className="w-36 inline-flex" htmlFor="password">Password</label>
+              <label htmlFor="password">Password</label>
               <input
-                className="w-80"
                 value={credentials.password}
                 onChange={handleChange}
                 name="password"
@@ -58,7 +55,6 @@ function Login() {
         
       </div>
       </div>
-    </div>
   );
 }
 
