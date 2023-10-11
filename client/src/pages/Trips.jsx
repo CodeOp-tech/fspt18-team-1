@@ -70,9 +70,11 @@ function Trips() {
                     <Link key={userTrip.id} to={`/trips/${userTrip.id}`}>
                         <li className='trips'>{userTrip.name}</li>
                         <div className="iconsimg">
+
                         <img src={`http://localhost:5000/images/${userTrip.imageName}`} id={userTrip.imageName} alt={userTrip.imageDescription} 
                         className="image-resize" 
                         />
+
                         </div>
                     </Link>  
                 ))}
@@ -84,11 +86,13 @@ function Trips() {
                     <Link key={trip.id} to={`/trips/${trip.id}`}>
                     <li className='trips'>{trip.name}</li>
                         <div className="iconsimg">
+
                         <img src={`http://localhost:5000/images/${trip.imageName}`} id={trip.imageName} alt={trip.imageDescription} 
                         className="image-resize" 
                         />
                         </div>
                     </Link> 
+
                 ))}
         </div>
     </div>
