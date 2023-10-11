@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./Footer.css"; 
-import {  FaFacebookF, FaApple, FaInstagram, FaTwitter } from 'react-icons/fa';
+import {  FaFacebookF, FaLinkedinIn, FaInstagram, FaTwitter, FaTiktok} from 'react-icons/fa';
 
 
 
@@ -15,10 +15,11 @@ function Footer() {
       </div>
       <div className="right-content">
         <div className="icons">
-          <FaFacebookF /> {/* Usar el ícono de Facebook */}
-          <FaApple />  {/* Usar el ícono de Apple */}
+          <FaFacebookF /> 
+          <FaLinkedinIn />  
           <FaInstagram />
           <FaTwitter />
+          <FaTiktok />
         </div>
       </div>
     </div>
