@@ -14,12 +14,15 @@ function MyTrip() {
     //user from Authentication context
     const { user } = useContext(AuthenticationContext);
     console.log("User Id del usuario Loggeado", user)
+    console.log("User Id equal trip.user.id", user)
     //actualiza la constante myTrips and Images
     useEffect(() => {
         getTrip();
         // Check if user.id is equal to trip.user_id
-        setIsUserIdEqual(user.id === trip.user_id);
-    }, []);
+        if(user){
+            setIsUserIdEqual(user.id === trip.user_id);
+        }
+    }, [user,trip]);
 
     //llama a la base de datos y trae todos los viajes
     const getTrip = () => {
@@ -27,7 +30,7 @@ function MyTrip() {
             .then((response) => response.json())
             .then((data) => {
                 setTrip(data);
-                // setEditingTrip(data); // Asigna los detalles del viaje a editing Trip
+                setEditingTrip(data); // Asigna los detalles del viaje a editing Trip
             })
             .catch((error) => {
                 console.log("No trips available")
@@ -68,10 +71,8 @@ function MyTrip() {
             <p className="trip-description">{trip.description}</p>
             <p className="trip-date"> {trip.date}</p>
             <div className="p-4"></div>
-            {/* {isUserIdEqual && <button className="" onClick={() => handleDelete(trip.id)}>Delete</button>}
-            {isUserIdEqual && <button className="" onClick={handleEdit}>Edit</button>} */}
-            <button className="" onClick={() => handleDelete(trip.id)}>Delete</button>
-            <button className="" onClick={handleEdit}>Edit</button>
+            {isUserIdEqual && <button className="" onClick={() => handleDelete(trip.id)}>Delete</button>}
+            {isUserIdEqual && <button className="" onClick={handleEdit}>Edit</button>}
             <div className="p-4">
                 <div className="main-content" style={{ marginBottom: '100px' }}></div>
             </div>
