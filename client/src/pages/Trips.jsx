@@ -62,35 +62,36 @@ function Trips() {
     };
 
     return (
+    <div className="page-container">
         <div className="trips">
             <h1>My Trips</h1>
-    
                 {emptyUserTripList && <p>{emptyUserTripList}</p>}
-                <div className='tripcard'>
                 {userTrips.map((userTrip) => (
                     <Link key={userTrip.id} to={`/trips/${userTrip.id}`}>
+                        <li className='trips'>{userTrip.name}</li>
                         <div className="iconsimg">
-                            <FaCircle /> {/* Usar el ícono de Facebook */}
+                        <img src={`http://localhost:5000/images/${userTrip.imageName}`} id={userTrip.imageName} alt={userTrip.imageDescription} 
+                        className="image-resize" 
+                        />
                         </div>
-                        <li className='trip'>{userTrip.name}</li>
                     </Link>  
                 ))}
-                </div>
                 
-            <h1>Trips</h1>
 
+            <h4>Trips</h4>
                 {emptyTripList && <p>{emptyTripList}</p>}
                 {trips.map((trip) => (
                     <Link key={trip.id} to={`/trips/${trip.id}`}>
+                    <li className='trips'>{trip.name}</li>
                         <div className="iconsimg">
-                            <FaCircle /> {/* Usar el ícono de Facebook */}
+                        <img src={`http://localhost:5000/images/${trip.imageName}`} id={trip.imageName} alt={trip.imageDescription} 
+                        className="image-resize" 
+                        />
                         </div>
-                        <li className='trip'>{trip.name}</li>
-                        {/*<img src={`http://localhost:5000/images/${trip.imageName}`} id={trip.imageName} alt={trip.imageDescription} />*/}
-                    </Link>
+                    </Link> 
                 ))}
         </div>
-        
+    </div>
 
     );
 };

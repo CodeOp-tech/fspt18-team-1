@@ -1,9 +1,18 @@
-.trip { 
+.page-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: auto; /* Ocupa el 100% de la altura de la ventana */
+    margin-bottom: 200px;
+  }
+
+.trips { 
     font-weight: bold;
     color: black;
     padding:20px;
     cursor: pointer;
     transition: border-color 0.25s;
+    position: relative;
 }
 
 .link { 
@@ -17,6 +26,7 @@
     max-width: 250px;
     overflow: hidden;
     transition: transform 0.2s ease-in-out;
+    
 
 }
 
@@ -35,5 +45,23 @@
     top: 50px;
     flex-direction: column;
     align-items: center;
+    
 
 }
+
+.image-resize {
+    width: 200px; /* Establece el ancho deseado */
+    height: 200px; /* Establece la misma altura para que la imagen sea un círculo */
+    border-radius: 50%; /* Aplica un borde redondeado para hacerlo circular */
+    object-fit: cover;
+   
+    
+}
+
+.trips h4 { 
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 100px;
+}
+
