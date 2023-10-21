@@ -20,6 +20,7 @@
 .login-container {
   max-width: 350px;
   margin: auto; /* Centra horizontalmente el contenedor */
+  margin-top: 20px;
   padding: 32px 100px;
   border: 2px solid #ccc;
   border-radius: 10px;

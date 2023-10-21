@@ -70,8 +70,22 @@ function Trips() {
                 {userTrips.map((userTrip) => (
                     <Link key={userTrip.id} to={`/trips/${userTrip.id}`}>
                         <div className="iconsimg">
+<<<<<<< Updated upstream
                            {/* <FaCircle />  Usar el ícono de Facebook */}
                         <img src={`http://localhost:5000/images/${userTrip.imageName}`} id={userTrip.imageName} alt={userTrip.imageDescription} />
+||||||| Stash base
+
+                        <img src={`http://localhost:5000/images/${userTrip.imageName}`} id={userTrip.imageName} alt={userTrip.imageDescription} 
+                        className="image-resize" 
+                        />
+
+=======
+
+                        <img src={`http://localhost:5000/images/${userTrip.imageName}`} id={userTrip.imageName} alt={userTrip.imageDescription} 
+                        className="image-resize1" 
+                        />
+
+>>>>>>> Stashed changes
                         </div>
                         <li className='trip'>{userTrip.name}</li>
                     </Link>

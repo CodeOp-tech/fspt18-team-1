@@ -13,8 +13,8 @@ function MyTrip() {
     const [isUserIdEqual, setIsUserIdEqual] = useState(false);
     //user from Authentication context
     const { user } = useContext(AuthenticationContext);
-    console.log("User Id del usuario Loggeado", user)
-    console.log("User Id equal trip.user.id", user)
+    // console.log("User Id del usuario Loggeado", user)
+    // console.log("User Id equal trip.user.id", user)
     //actualiza la constante myTrips and Images
     useEffect(() => {
         getTrip();
