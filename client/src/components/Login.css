@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center; /* Centra horizontalmente */
   align-items: center; /* Centra verticalmente */
-  height: 600px; /* Ocupa el 100% de la altura de la ventana */
+  height: auto; /* Ocupa el 100% de la altura de la ventana */
   margin: 0;
 }
 
@@ -94,7 +94,3 @@
   .login-container a:hover {
     text-decoration: underline;
   }
-
-link { 
-  color: black; 
-}

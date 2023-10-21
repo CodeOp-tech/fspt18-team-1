@@ -14,6 +14,7 @@ function NavBar() {
     <ul>
       <input className="search"/>
         <FaSistrix className="icon-search"/>
+    
       <li>
         <Link to="/trips">Trips</Link>
       </li>

@@ -1,4 +1,11 @@
 /* Contenedor principal */
+.page-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  height: 600px; /* Ocupa el 100% de la altura de la ventana */
+  margin: 0;
+}
 .signup-container {
     max-width: 350px;
     margin: auto;
@@ -43,7 +50,7 @@
   .signup-container input[type="password"],
   .signup-container input[type="email"],
   .signup-container input[type="date"],
-  .signup-container input [type="foto"] {
+  .signup-container input[type="foto"] {
     padding: 10px;
     margin-bottom: 14px;
     border: 1px solid #e1e8ed;
