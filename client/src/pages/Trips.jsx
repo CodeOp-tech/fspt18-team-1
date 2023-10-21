@@ -70,11 +70,9 @@ function Trips() {
                     <Link key={userTrip.id} to={`/trips/${userTrip.id}`}>
                         <li className='trips'>{userTrip.name}</li>
                         <div className="iconsimg">
-
                         <img src={`http://localhost:5000/images/${userTrip.imageName}`} id={userTrip.imageName} alt={userTrip.imageDescription} 
-                        className="image-resize" 
+                        className="image-resize1" 
                         />
-
                         </div>
                     </Link>  
                 ))}
